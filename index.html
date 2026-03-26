@@ -1,0 +1,938 @@
+```html
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050505">
+    <title>AURUM BURGERS | Las Mejores Hamburguesas Gourmet de Lima</title>
+    <meta name="description" content="Hamburguesas premium con ingredientes 100% frescos. Pedido rápido por WhatsApp. Entrega en 40 min.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            300: '#F9E394', 400: '#F4D03F', 500: '#D4AF37', 600: '#B8860B', 700: '#9A6F0A',
+                        },
+                        dark: { 900: '#0A0A0A', 950: '#030303', 800: '#121212', 850: '#0D0D0D' },
+                        accent: { red: '#8B0000', crimson: '#B22222', green: '#1DB954' }
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'gold': '0 0 40px rgba(212, 175, 55, 0.15)',
+                        'gold-lg': '0 0 60px rgba(212, 175, 55, 0.25)',
+                        'gold-xl': '0 0 100px rgba(212, 175, 55, 0.35)',
+                        'whatsapp': '0 8px 30px rgba(37, 211, 102, 0.4)',
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'bounce-slow': 'bounceSlow 2s infinite',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+                        shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        glow: { '0%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)' }, '100%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.6)' } },
+                        bounceSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        body { background-color: #030303; color: #ffffff; overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; line-height: 1.1; letter-spacing: -0.02em; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #D4AF37, #B8860B); border-radius: 4px; }
+
+        /* Parallax */
+        .parallax-section { position: relative; overflow: hidden; }
+        .parallax-bg { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; background-size: cover; background-position: center; z-index: 0; will-change: transform; }
+        .parallax-overlay { position: absolute; inset: 0; z-index: 1; }
+        .parallax-content { position: relative; z-index: 10; }
+
+        /* Glassmorphism */
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.06); }
+        .glass-nav { background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(32px); border-bottom: 1px solid rgba(212, 175, 55, 0.08); }
+
+        /* Premium Buttons - Conversion Optimized */
+        .btn-primary {
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: #fff; font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 60px rgba(37, 211, 102, 0.6); }
+        .btn-primary span { position: relative; z-index: 1; }
+
+        .btn-gold {
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            color: #030303; font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+            animation: gradientShift 3s ease infinite;
+        }
+        @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .btn-gold:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 60px rgba(212, 175, 55, 0.5); }
+        .btn-gold span { position: relative; z-index: 1; }
+
+        .btn-secondary {
+            background: transparent; color: #fff; font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover { border-color: #D4AF37; color: #D4AF37; transform: translateY(-4px); }
+
+        /* Product Cards */
+        .product-card {
+            background: linear-gradient(145deg, rgba(18,18,18,0.95), rgba(10,10,10,0.98));
+            border-radius: 24px; overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .product-card:hover { transform: translateY(-12px) scale(1.02); border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15); }
+        .product-card-img { position: relative; height: 320px; overflow: hidden; }
+        .product-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(3,3,3,0.95) 100%); z-index: 2; }
+        .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .product-card:hover .product-card-img img { transform: scale(1.08) rotate(1deg); }
+
+        /* Action Buttons */
+        .action-btn {
+            width: 48px; height: 48px; border-radius: 16px;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 1.125rem;
+        }
+        .action-btn:hover { background: rgba(212, 175, 55, 0.9); border-color: #D4AF37; color: #030303; transform: scale(1.08); }
+        .action-btn.active { background: #D4AF37; border-color: #D4AF37; color: #030303; }
+        .action-btn.like-active { background: linear-gradient(135deg, #B22222, #8B0000); border-color: #B22222; animation: heartbeat 0.5s; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.15); } 50% { transform: scale(1); } 75% { transform: scale(1.1); } }
+
+        /* Badges */
+        .badge { position: absolute; padding: 8px 16px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; z-index: 5; backdrop-filter: blur(8px); }
+        .badge-popular { top: 20px; left: 20px; background: linear-gradient(135deg, rgba(29,185,84,0.95), rgba(18,140,126,0.95)); color: #fff; box-shadow: 0 4px 20px rgba(29,185,84,0.4); }
+        .badge-new { top: 20px; left: 20px; background: linear-gradient(135deg, rgba(212,175,55,0.95), rgba(184,134,11,0.95)); color: #030303; box-shadow: 0 4px 20px rgba(212,175,55,0.4); }
+        .badge-spicy { top: 20px; left: 20px; background: linear-gradient(135deg, rgba(178,34,34,0.95), rgba(139,0,0,0.95)); color: #fff; box-shadow: 0 4px 20px rgba(178,34,34,0.4); }
+        .badge-urgent { top: 20px; right: 20px; left: auto; background: linear-gradient(135deg, #DC2626, #991B1B); color: #fff; box-shadow: 0 4px 20px rgba(220,38,38,0.4); animation: pulse 2s infinite; }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed; bottom: 40px; right: 40px;
+            width: 64px; height: 64px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 40px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(3,3,3,0.9);
+            z-index: 100; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: float 3s ease-in-out infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 15px 60px rgba(37, 211, 102, 0.6); }
+        .whatsapp-float i { color: #fff; font-size: 1.875rem; }
+        .whatsapp-pulse { position: absolute; inset: -8px; border-radius: 50%; border: 2px solid #25D366; animation: pulse-ring 2s infinite; }
+        @keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 120px; right: 40px; max-width: 400px;
+            background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(32px);
+            padding: 18px 24px; border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex; align-items: center; gap: 16px;
+            transform: translateY(100px) scale(0.9); opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 9999; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        .toast.show { transform: translateY(0) scale(1); opacity: 1; }
+        .toast-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .toast-icon.success { background: rgba(29,185,84,0.15); color: #1DB954; }
+        .toast-icon.heart { background: rgba(178,34,34,0.15); color: #B22222; }
+        .toast-icon.star { background: rgba(212,175,55,0.15); color: #D4AF37; }
+        .toast-message { color: #fff; font-weight: 500; font-size: 0.9375rem; }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Feature Cards */
+        .feature-card {
+            position: relative; background: linear-gradient(145deg, rgba(18,18,18,0.8), rgba(10,10,10,0.9));
+            padding: 48px 32px; border-radius: 24px; text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-card:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-10px); box-shadow: 0 30px 80px rgba(212, 175, 55, 0.1); }
+        .feature-icon {
+            width: 88px; height: 88px; margin: 0 auto 28px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+            border-radius: 24px; display: flex; align-items: center; justify-content: center;
+            font-size: 2.25rem; color: #D4AF37; transition: all 0.5s;
+        }
+        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
+
+        /* Testimonial Cards */
+        .testimonial-card {
+            position: relative; background: linear-gradient(145deg, rgba(18,18,18,0.9), rgba(10,10,10,0.95));
+            padding: 48px 40px; border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .testimonial-card:hover { border-color: rgba(212, 175, 55, 0.25); transform: translateY(-8px); }
+        .testimonial-card::before { content: '"'; position: absolute; top: 24px; left: 32px; font-size: 120px; font-family: 'Playfair Display', serif; color: rgba(212, 175, 55, 0.08); line-height: 1; }
+
+        /* Stats */
+        .stat-number {
+            font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5rem); font-weight: 700;
+            background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 50%, #F4D03F 100%);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed; inset: 0; background: rgba(3, 3, 3, 0.98);
+            backdrop-filter: blur(40px); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 40px;
+            opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-menu-link { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; color: #fff; text-decoration: none; transition: all 0.3s ease; }
+        .mobile-menu-link:hover { color: #D4AF37; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 12px 20px calc(24px + env(safe-area-inset-bottom));
+            z-index: 1000; display: none;
+        }
+        .bottom-nav.active { display: flex; }
+        .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px; color: #666; transition: all 0.3s; cursor: pointer; }
+        .bottom-nav-item i { font-size: 1.375rem; transition: all 0.3s; }
+        .bottom-nav-item span { font-size: 0.6875rem; font-weight: 600; }
+        .bottom-nav-item.active { color: #D4AF37; }
+        .bottom-nav-item.active i { transform: translateY(-4px); filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.5)); }
+        .bottom-nav-center { position: relative; margin-top: -36px; }
+        .bottom-nav-center-btn {
+            width: 68px; height: 68px; border-radius: 50%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 5px rgba(3,3,3,0.95);
+            transition: all 0.3s; cursor: pointer;
+        }
+        .bottom-nav-center-btn:hover { transform: scale(1.08) translateY(-6px); }
+        .bottom-nav-center-btn i { color: #fff; font-size: 1.625rem; }
+
+        /* Loader */
+        .loader { position: fixed; inset: 0; background: #030303; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; transition: all 0.6s; }
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-logo { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 10vw, 5rem); font-weight: 900; background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 50%, #F4D03F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s linear infinite; }
+        .loader-tagline { color: #666; margin-top: 20px; font-size: 0.875rem; letter-spacing: 0.3em; text-transform: uppercase; }
+        .loader-ring { position: absolute; width: 400px; height: 400px; border: 1px solid transparent; border-top-color: rgba(212, 175, 55, 0.3); border-radius: 50%; animation: spin 2s infinite; }
+        .loader-ring::before { content: ''; position: absolute; inset: 30px; border: 1px solid transparent; border-top-color: rgba(212, 175, 55, 0.5); border-radius: 50%; animation: spin 1.5s infinite reverse; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Gallery */
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 250px); gap: 20px; } .gallery-item-large { grid-column: span 2; grid-row: span 2; } }
+        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* Promo Cards */
+        .promo-card { position: relative; border-radius: 28px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); transition: all 0.5s; }
+        .promo-card:hover { transform: translateY(-8px); border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15); }
+        .promo-card-img { width: 100%; height: 350px; object-fit: cover; transition: transform 0.8s; }
+        .promo-card:hover .promo-card-img { transform: scale(1.05); }
+        .promo-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(180deg, transparent 0%, rgba(3,3,3,0.95) 100%); }
+
+        /* Urgency Banner */
+        .urgency-banner {
+            background: linear-gradient(90deg, rgba(220,38,38,0.15), rgba(153,27,27,0.15));
+            border-top: 1px solid rgba(220,38,38,0.3);
+            border-bottom: 1px solid rgba(220,38,38,0.3);
+            padding: 12px 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bottom-nav { display: flex; }
+            .desktop-nav { display: none; }
+            .whatsapp-float { bottom: 100px; right: 20px; width: 56px; height: 56px; }
+            .toast { bottom: 100px; right: 20px; left: 20px; }
+            .parallax-bg { transform: none !important; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            .parallax-bg { transform: none !important; }
+        }
+
+        ::selection { background: rgba(212, 175, 55, 0.3); color: #fff; }
+        *:focus-visible { outline: 2px solid #D4AF37; outline-offset: 2px; }
+
+        .gradient-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; pointer-events: none; }
+        .gradient-orb-1 { top: -20%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(212,175,55,0.4) 0%, transparent 70%); animation: float 8s infinite; }
+        .gradient-orb-2 { bottom: -20%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%); animation: float 10s infinite 4s; }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-logo">AURUM</div>
+        <p class="loader-tagline">Premium Gourmet Burgers</p>
+    </div>
+
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        <p class="text-sm md:text-base text-red-400 font-medium">
+            <i class="fas fa-fire mr-2"></i>
+            <span class="hidden md:inline">🔥</span>
+            Pedido mínimo S/ 35 para delivery gratis • 
+            <span class="text-gold-400">Entrega en 40 min o menos</span>
+            <span class="hidden md:inline"> • </span>
+            <span class="md:hidden"><br></span>
+            <span class="text-gold-400 font-bold">¡Solo 3 promociones disponibles hoy!</span>
+        </p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-500 glass-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="text-2xl md:text-3xl font-black font-display tracking-tight">
+                    <span class="text-white">AURUM</span><span class="text-gold-500">.</span>
+                </a>
+                <div class="desktop-nav hidden md:flex items-center gap-8">
+                    <a href="#menu" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Menú</a>
+                    <a href="#promociones" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Promociones</a>
+                    <a href="#testimonios" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Reseñas</a>
+                    <a href="https://wa.me/51999999999?text=Hola,%20quiero%20hacer%20mi%20pedido" class="btn-primary px-6 py-2.5 rounded-full text-sm">
+                        <span><i class="fab fa-whatsapp"></i> Pedir Ahora</span>
+                    </a>
+                </div>
+                <button class="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-5 cursor-pointer" id="mobileMenuBtn">
+                    <span class="w-6 h-0.5 bg-gold-400 transition-all" id="menuLine1"></span>
+                    <span class="w-6 h-0.5 bg-gold-400 transition-all" id="menuLine2"></span>
+                    <span class="w-6 h-0.5 bg-gold-400 transition-all" id="menuLine3"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <a href="#menu" class="mobile-menu-link mobile-link">Menú</a>
+        <a href="#promociones" class="mobile-menu-link mobile-link">Promociones</a>
+        <a href="#testimonios" class="mobile-menu-link mobile-link">Reseñas</a>
+        <a href="https://wa.me/51999999999" class="btn-primary px-10 py-4 rounded-full mt-4 mobile-link">
+            <span><i class="fab fa-whatsapp"></i> Pedir Ahora</span>
+        </a>
+    </div>
+
+    <!-- HERO SECTION - Conversion Optimized -->
+    <section id="inicio" class="parallax-section min-h-screen flex items-center justify-center relative">
+        <div class="parallax-bg" id="heroBg" style="background-image: url('https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/1c6101127-f8b6-4d30-a279-29c1cd4d9f42.png');"></div>
+        <div class="parallax-overlay" style="background: linear-gradient(180deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.8) 50%, rgba(3,3,3,1) 100%);"></div>
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+
+        <div class="parallax-content text-center px-4 max-w-5xl mx-auto pt-28">
+            <div class="reveal">
+                <span class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass text-gold-400 text-xs font-bold tracking-widest uppercase mb-6">
+                    <i class="fas fa-clock text-gold-500 animate-pulse"></i>
+                    Entrega en 40 minutos
+                </span>
+            </div>
+            
+            <h1 class="reveal text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight" style="transition-delay: 100ms;">
+                El Sabor Que <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600">Tu Paladar Merece</span>
+            </h1>
+            
+            <p class="reveal text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light" style="transition-delay: 200ms;">
+                Hamburguesas gourmet con carne 100% Angus, ingredientes frescos del día 
+                y el toque secreto que las hace irresistibles.
+            </p>
+            
+            <div class="reveal flex flex-col sm:flex-row gap-4 justify-center mb-8" style="transition-delay: 300ms;">
+                <a href="https://wa.me/51999999999?text=Hola,%20quiero%20hacer%20mi%20primer%20pedido" class="btn-primary px-10 py-5 rounded-full text-base shadow-lg">
+                    <span><i class="fab fa-whatsapp text-xl"></i> Pedir por WhatsApp</span>
+                </a>
+                <a href="#menu" class="btn-secondary px-10 py-5 rounded-full text-base backdrop-blur-sm">
+                    <span><i class="fas fa-utensils"></i> Ver Menú</span>
+                </a>
+            </div>
+
+            <!-- Social Proof -->
+            <div class="reveal flex items-center justify-center gap-6 text-sm text-gray-400" style="transition-delay: 400ms;">
+                <div class="flex items-center gap-2">
+                    <div class="flex text-gold-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-white font-medium">4.9/5</span>
+                </div>
+                <div class="w-px h-4 bg-gray-600"></div>
+                <div><i class="fas fa-check-circle text-green-500 mr-1"></i>15,000+ Clientes Felices</div>
+                <div class="w-px h-4 bg-gray-600 hidden sm:block"></div>
+                <div class="hidden sm:block"><i class="fas fa-shield-alt text-gold-500 mr-1"></i>Pago Seguro</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS - Trust Building -->
+    <section class="py-16 bg-dark-950 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="reveal text-center">
+                    <div class="stat-number" data-target="15000">0</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Pedidos Entregados</p>
+                </div>
+                <div class="reveal text-center" style="transition-delay: 100ms;">
+                    <div class="stat-number" data-target="98">0</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">% Clientes Satisfechos</p>
+                </div>
+                <div class="reveal text-center" style="transition-delay: 200ms;">
+                    <div class="stat-number" data-target="40">0</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Min Tiempo Promedio</p>
+                </div>
+                <div class="reveal text-center" style="transition-delay: 300ms;">
+                    <div class="stat-number" data-target="100">0</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">% Ingredientes Frescos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION - Primary Conversion Point -->
+    <section id="menu" class="py-24 bg-dark-900 relative">
+        <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, #D4AF37 1px, transparent 0); background-size: 40px 40px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-5 py-2.5 rounded-full glass text-gold-400 text-xs font-bold tracking-widest uppercase mb-4">
+                    <i class="fas fa-fire mr-1 text-red-500"></i> Más Vendidas
+                </span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+                    Nuestras <span class="text-gold-500">Hamburguesas</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">
+                    Cada mordida es una experiencia. Ingredientes premium, preparación artesanal.
+                </p>
+            </div>
+
+            <!-- Filter -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+                <button class="filter-btn active px-6 py-2.5 rounded-full glass text-sm font-semibold transition-all" data-filter="all">Todas</button>
+                <button class="filter-btn px-6 py-2.5 rounded-full glass text-white/50 hover:text-white text-sm font-semibold transition-all" data-filter="classic">Clásicas</button>
+                <button class="filter-btn px-6 py-2.5 rounded-full glass text-white/50 hover:text-white text-sm font-semibold transition-all" data-filter="premium">Premium</button>
+                <button class="filter-btn px-6 py-2.5 rounded-full glass text-white/50 hover:text-white text-sm font-semibold transition-all" data-filter="spicy">Picantes</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid"></div>
+
+            <!-- CTA After Menu -->
+            <div class="text-center mt-16 reveal">
+                <p class="text-gray-400 mb-6 font-light">¿No sabes cuál elegir?</p>
+                <a href="https://wa.me/51999999999?text=Hola,%20necesito%20ayuda%20para%20elegir%20mi%20hamburguesa" class="btn-secondary px-8 py-4 rounded-full">
+                    <span><i class="fas fa-comments"></i> Te Ayudamos a Elegir</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMOTIONS - Urgency & Value -->
+    <section id="promociones" class="parallax-section py-24 relative">
+        <div class="parallax-bg" id="promoBg" style="background-image: url('https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/16c175ece-b026-4889-8ba1-598a03a13abc.png');"></div>
+        <div class="parallax-overlay" style="background: linear-gradient(180deg, rgba(3,3,3,0.92) 0%, rgba(3,3,3,0.85) 100%);"></div>
+        
+        <div class="parallax-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-5 py-2.5 rounded-full glass text-red-400 text-xs font-bold tracking-widest uppercase mb-4 animate-pulse">
+                    <i class="fas fa-clock mr-1"></i> Tiempo Limitado
+                </span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+                    Promociones <span class="text-gold-500">Especiales</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">
+                    Ahorros exclusivos solo por tiempo limitado. ¡Aprovecha antes que se agoten!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Promo 1 -->
+                <div class="promo-card reveal">
+                    <span class="badge badge-urgent"><i class="fas fa-bolt mr-1"></i>¡Últimas 5!</span>
+                    <img src="https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/16c175ece-b026-4889-8ba1-598a03a13abc.png" alt="Combo Duo" class="promo-card-img">
+                    <div class="promo-card-content">
+                        <span class="inline-block px-4 py-1.5 rounded-full bg-gold-500 text-dark-900 text-xs font-bold uppercase mb-3">
+                            <i class="fas fa-users mr-1"></i> Ahorra S/ 25
+                        </span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Combo Dúo Perfecto</h3>
+                        <p class="text-gray-300 text-sm mb-4 font-light">2 Hamburguesas Classic + Papas Medianas + 2 Bebidas</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-500 line-through text-sm">S/ 84.80</span>
+                                <span class="text-3xl font-bold text-gold-400 ml-3">S/ 59.90</span>
+                            </div>
+                            <a href="https://wa.me/51999999999?text=Hola,%20quiero%20el%20Combo%20Duo%20Perfecto" class="btn-primary px-6 py-3 rounded-full text-sm">
+                                <span>Pedir Ahora</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo 2 -->
+                <div class="promo-card reveal" style="transition-delay: 100ms;">
+                    <img src="https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/112eede85-a5b9-47fc-aff1-a58075e2b6c0.png" alt="Inferno Pack" class="promo-card-img">
+                    <div class="promo-card-content">
+                        <span class="inline-block px-4 py-1.5 rounded-full bg-accent-crimson text-white text-xs font-bold uppercase mb-3">
+                            <i class="fas fa-fire mr-1"></i> Para Valientes
+                        </span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Pack Inferno</h3>
+                        <p class="text-gray-300 text-sm mb-4 font-light">1 Hamburguesa Inferno + Aros de Cebolla + Bebida</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-500 line-through text-sm">S/ 58.70</span>
+                                <span class="text-3xl font-bold text-gold-400 ml-3">S/ 45.90</span>
+                            </div>
+                            <a href="https://wa.me/51999999999?text=Hola,%20quiero%20el%20Pack%20Inferno" class="btn-primary px-6 py-3 rounded-full text-sm">
+                                <span>Pedir Ahora</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US - Trust Building -->
+    <section id="experiencia" class="py-24 bg-dark-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+                    ¿Por Qué <span class="text-gold-500">Elegirnos</span>?
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light">
+                    No somos solo hamburguesas. Somos una experiencia completa.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">100% Fresco Diario</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Ingredientes seleccionados cada mañana. Nada congelado, nada pre-preparado.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 100ms;">
+                    <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Hecho al Momento</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Tu hamburguesa se prepara cuando haces tu pedido. Máxima frescura garantizada.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 200ms;">
+                    <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Entrega Rápida</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">40 minutos o menos. Si tardamos más, tu próxima hamburguesa es gratis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS - Social Proof -->
+    <section id="testimonios" class="py-24 bg-dark-900 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-5 py-2.5 rounded-full glass text-gold-400 text-xs font-bold tracking-widest uppercase mb-4">
+                    <i class="fas fa-heart mr-1"></i> Testimonios Reales
+                </span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+                    Lo Que Dicen <span class="text-gold-500">Nuestros Clientes</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center text-dark-900 font-bold">CR</div>
+                        <div>
+                            <h4 class="text-white font-bold">Carlos R.</h4>
+                            <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed font-light">"Las mejores hamburguesas de Lima. El pedido por WhatsApp es súper rápido y llega caliente. ¡Ya soy cliente frecuente!"</p>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center text-dark-900 font-bold">MA</div>
+                        <div>
+                            <h4 class="text-white font-bold">María A.</h4>
+                            <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed font-light">"La Inferno es increíble. El nivel de picante es perfecto y los ingredientes se notan frescos. 100% recomendado."</p>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 200ms;">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center text-dark-900 font-bold">JL</div>
+                        <div>
+                            <h4 class="text-white font-bold">Juan L.</h4>
+                            <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed font-light">"Calidad premium a buen precio. La entrega fue en 35 minutos y la hamburguesa llegó perfecta. Volveré a pedir."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA - Maximum Conversion -->
+    <section class="py-24 bg-gradient-to-br from-dark-900 via-dark-850 to-dark-900 relative overflow-hidden">
+        <div class="gradient-orb gradient-orb-2" style="bottom: -30%; left: 50%; transform: translateX(-50%);"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 reveal">
+            <div class="inline-block px-5 py-2.5 rounded-full glass text-red-400 text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">
+                <i class="fas fa-clock mr-1"></i> Abierto Hasta las 11 PM
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                ¿Tienes <span class="text-gold-500">Hambre</span>?
+            </h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light">
+                Tu hamburguesa gourmet te está esperando. 
+                <span class="text-white font-medium">Pedido mínimo S/ 35 • Delivery gratis</span>
+            </p>
+            <a href="https://wa.me/51999999999?text=Hola,%20quiero%20hacer%20mi%20pedido%20ahora" class="btn-primary px-12 py-6 rounded-full text-lg shadow-xl inline-flex items-center gap-3">
+                <i class="fab fa-whatsapp text-2xl"></i>
+                <span>Pedir por WhatsApp Ahora</span>
+            </a>
+            <p class="mt-6 text-gray-500 text-sm">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>Respuesta en menos de 2 minutos
+                <span class="mx-3">•</span>
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>Entrega en 40 min o menos
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-950 py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <a href="#" class="text-2xl font-black font-display tracking-tight">
+                        <span class="text-white">AURUM</span><span class="text-gold-500">.</span>
+                    </a>
+                    <p class="text-gray-500 mt-2 text-sm">Gourmet Burgers • Lima, Perú</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-gold-400 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-gold-400 transition"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-gold-400 transition"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/5 text-center text-gray-600 text-sm">
+                <p>&copy; 2024 Aurum Burgers. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <div class="bottom-nav" id="bottomNav">
+        <a href="#menu" class="bottom-nav-item" data-page="menu"><i class="fas fa-hamburger"></i><span>Menú</span></a>
+        <a href="#promociones" class="bottom-nav-item" data-page="promociones"><i class="fas fa-tag"></i><span>Ofertas</span></a>
+        <div class="bottom-nav-center">
+            <a href="https://wa.me/51999999999" class="bottom-nav-center-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <button onclick="toggleFavorites()" class="bottom-nav-item" data-page="favorites">
+            <i class="fas fa-heart"></i><span>Favoritos</span>
+            <span class="badge-count" id="favCountNav" style="display: none; position: absolute; top: 0; right: 50%; transform: translateX(14px); background: #D4AF37; color: #030303; font-size: 0.625rem; font-weight: 700; padding: 2px 6px; border-radius: 10px;">0</span>
+        </button>
+        <a href="#testimonios" class="bottom-nav-item" data-page="testimonios"><i class="fas fa-star"></i><span>Reseñas</span></a>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/51999999999?text=Hola,%20tengo%20una%20consulta" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <div class="whatsapp-pulse"></div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon success" id="toastIcon"><i class="fas fa-check-circle"></i></div>
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script>
+        // CONFIG
+        const WHATSAPP_NUMBER = "51999999999";
+
+        // DATA - Optimized for conversion
+        const burgers = [
+            { id: 1, name: "Aurum Classic", price: 32.90, desc: "Carne Angus 180g, cheddar premium, lechuga, tomate, salsa secreta. La favorita de nuestros clientes.", img: "https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/1c6101127-f8b6-4d30-a279-29c1cd4d9f42.png", likes: 1247, category: "classic", badge: "popular" },
+            { id: 2, name: "Inferno Spice", price: 35.90, desc: "Carne premium, jalapeños frescos, pepper jack, salsa picante de la casa. Para los más valientes.", img: "https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/112eede85-a5b9-47fc-aff1-a58075e2b6c0.png", likes: 2156, category: "spicy", badge: "spicy" },
+            { id: 3, name: "Bacon King", price: 38.90, desc: "Doble carne, tocino crujiente, doble cheddar, cebolla caramelizada, BBQ artesanal. Una explosión de sabor.", img: "https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/16c175ece-b026-4889-8ba1-598a03a13abc.png", likes: 1893, category: "classic", badge: "new" },
+            { id: 4, name: "Truffle Deluxe", price: 45.90, desc: "Carne Wagyu, queso suizo, trufa negra importada, rúcula fresca. La experiencia más premium.", img: "https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/1598a87cc-2a2c-40ab-832c-158ef6c135a6.png", likes: 1567, category: "premium", badge: "new" },
+            { id: 5, name: "Double Gold", price: 42.90, desc: "Doble carne Angus, doble queso, tocino, huevo fresco, salsa especial. Para cuando tienes mucha hambre.", img: "https://image.qwenlm.ai/public_source/8ffead2a-869f-47ab-8fba-dc2378eab8a9/1c6101127-f8b6-4d30-a279-29c1cd4d9f42.png", likes: 2834, category: "premium", badge: "popular" },
+            { id: 6, name: "Veggie Gold", price: 29.90, desc: "Medallón vegetal premium, aguacate fresco, queso vegano, lechuga. Sabor increíble sin carne.", img: "https://images.unsplash.com/photo-1550950158-d0d960dff51b?w=600", likes: 892, category: "classic", badge: null }
+        ];
+
+        // STATE
+        let favorites = {};
+
+        // LOADER
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1200); });
+
+        // PARALLAX
+        let scrollY = 0, targetScrollY = 0;
+        const isMobile = window.innerWidth <= 768;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function animateParallax() {
+            if (!prefersReducedMotion && !isMobile) {
+                scrollY += (targetScrollY - scrollY) * 0.08;
+                const heroBg = document.getElementById('heroBg');
+                const promoBg = document.getElementById('promoBg');
+                if (heroBg) heroBg.style.transform = `translate3d(0, ${scrollY * 0.35}px, 0)`;
+                if (promoBg) {
+                    const rect = document.getElementById('promociones').getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        promoBg.style.transform = `translate3d(0, ${scrollY * 0.2}px, 0)`;
+                    }
+                }
+            }
+            requestAnimationFrame(animateParallax);
+        }
+        window.addEventListener('scroll', () => { targetScrollY = window.scrollY; }, { passive: true });
+        if (!prefersReducedMotion && !isMobile) animateParallax();
+
+        // NAVBAR
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => { navbar.classList.toggle('glass-nav', window.scrollY > 100); });
+
+        // MOBILE MENU
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const [menuLine1, menuLine2, menuLine3] = [document.getElementById('menuLine1'), document.getElementById('menuLine2'), document.getElementById('menuLine3')];
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            const isActive = mobileMenuOverlay.classList.contains('active');
+            mobileMenuOverlay.classList.toggle('active');
+            if (isActive) {
+                menuLine1.style.transform = 'rotate(0)'; menuLine2.style.opacity = '1'; menuLine3.style.transform = 'rotate(0)';
+            } else {
+                menuLine1.style.transform = 'rotate(45deg) translate(6px, 6px)'; menuLine2.style.opacity = '0'; menuLine3.style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            }
+        });
+        
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                menuLine1.style.transform = 'rotate(0)'; menuLine2.style.opacity = '1'; menuLine3.style.transform = 'rotate(0)';
+            });
+        });
+
+        // RENDER MENU
+        const menuGrid = document.getElementById('menuGrid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderBurgers(filter = 'all') {
+            menuGrid.innerHTML = '';
+            const filtered = filter === 'all' ? burgers : burgers.filter(b => b.category === filter);
+
+            filtered.forEach((burger, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card reveal active';
+                card.style.animationDelay = `${index * 80}ms`;
+                
+                const isFav = favorites[burger.id];
+                const badgeHTML = burger.badge ? `<span class="badge badge-${burger.badge}">${burger.badge === 'spicy' ? '<i class="fas fa-fire mr-1"></i>Picante' : burger.badge === 'new' ? '<i class="fas fa-star mr-1"></i>Nuevo' : '<i class="fas fa-fire mr-1"></i>Más Vendida'}</span>` : '';
+
+                card.innerHTML = `
+                    <div class="product-card-img">
+                        ${badgeHTML}
+                        <img src="${burger.img}" alt="${burger.name}" loading="lazy">
+                        <div class="absolute top-5 right-5 flex flex-col gap-3 z-10">
+                            <button class="action-btn like-btn ${isFav ? 'like-active' : ''}" onclick="toggleFavorite(${burger.id})" aria-label="Favorito">
+                                <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white">${burger.name}</h3>
+                            <span class="text-gold-400 font-bold text-xl">S/ ${burger.price.toFixed(2)}</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-5 leading-relaxed font-light">${burger.desc}</p>
+                        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20quiero%20pedir%20la%20hamburguesa%20${encodeURIComponent(burger.name)}" class="btn-primary w-full py-3.5 rounded-full text-sm">
+                            <span><i class="fab fa-whatsapp"></i> Pedir Esta</span>
+                        </a>
+                    </div>
+                `;
+                menuGrid.appendChild(card);
+            });
+            setTimeout(() => observeReveal(), 100);
+        }
+
+        renderBurgers();
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => { b.classList.remove('active', 'text-white', 'bg-white/10'); b.classList.add('text-white/50'); });
+                btn.classList.add('active', 'text-white', 'bg-white/10'); btn.classList.remove('text-white/50');
+                renderBurgers(btn.getAttribute('data-filter'));
+            });
+        });
+
+        // FAVORITES
+        function toggleFavorite(id) {
+            const burger = burgers.find(b => b.id === id);
+            const btn = event.currentTarget;
+            
+            if (favorites[id]) {
+                delete favorites[id];
+                btn.classList.remove('like-active', 'active');
+                btn.querySelector('i').classList.remove('fas'); btn.querySelector('i').classList.add('far');
+                showToast(`${burger.name} eliminado de favoritos`, 'heart');
+            } else {
+                favorites[id] = true;
+                btn.classList.add('like-active', 'active');
+                btn.querySelector('i').classList.remove('far'); btn.querySelector('i').classList.add('fas');
+                showToast(`${burger.name} guardado en favoritos`, 'star');
+            }
+            updateFavoritesCount();
+        }
+
+        function updateFavoritesCount() {
+            const count = Object.keys(favorites).length;
+            const favCountNav = document.getElementById('favCountNav');
+            favCountNav.textContent = count;
+            favCountNav.style.display = count > 0 ? 'block' : 'none';
+        }
+
+        function toggleFavorites() {
+            const favIds = Object.keys(favorites);
+            if (favIds.length === 0) { showToast('No tienes favoritos aún', 'star'); return; }
+            showToast(`${favIds.length} hamburguesas en favoritos`, 'star');
+        }
+
+        // TOAST
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const icons = { success: 'fa-check-circle', heart: 'fa-heart', star: 'fa-star' };
+            toastIcon.className = `toast-icon ${type}`;
+            toastIcon.innerHTML = `<i class="fas ${icons[type]}"></i>`;
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            if (navigator.vibrate) navigator.vibrate(50);
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // REVEAL
+        function observeReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+        observeReveal();
+
+        // STATS
+        let statsAnimated = false;
+        window.addEventListener('scroll', () => {
+            if (statsAnimated) return;
+            const section = document.querySelector('.stat-number')?.closest('section');
+            if (section && section.getBoundingClientRect().top < window.innerHeight - 100) {
+                statsAnimated = true;
+                document.querySelectorAll('.stat-number').forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 50;
+                    const suffix = target === 100 ? '%' : target === 98 ? '%' : '+';
+                    const update = () => {
+                        if (current < target) {
+                            current += increment;
+                            stat.textContent = Math.ceil(current).toLocaleString() + suffix;
+                            setTimeout(update, 30);
+                        } else { stat.textContent = target.toLocaleString() + suffix; }
+                    };
+                    update();
+                });
+            }
+        });
+
+        // BOTTOM NAV
+        const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + 300;
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.id;
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    bottomNavItems.forEach(item => {
+                        item.classList.toggle('active', item.getAttribute('data-page') === sectionId);
+                    });
+                }
+            });
+        });
+
+        // FEATURE CARD MOUSE TRACKING
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+                card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height) * 100 + '%');
+            });
+        });
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') { e.preventDefault(); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+    </script>
+</body>
+</html>
+```

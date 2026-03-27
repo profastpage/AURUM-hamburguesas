@@ -1362,11 +1362,11 @@
     <!-- Bottom Navigation (Mobile) -->
     <div class="bottom-nav" id="bottomNav">
         <div class="bottom-nav-items">
-            <button class="bottom-nav-item active" data-page="menu" aria-label="Ir al Menú">
+            <button class="bottom-nav-item active" data-page="menu" aria-label="Ir al Menú" onclick="window.navigateToSection('menu')">
                 <i class="fas fa-hamburger"></i>
                 <span>Menú</span>
             </button>
-            <button class="bottom-nav-item" data-page="promociones" aria-label="Ir a Ofertas">
+            <button class="bottom-nav-item" data-page="promociones" aria-label="Ir a Ofertas" onclick="window.navigateToSection('promociones')">
                 <i class="fas fa-tag"></i>
                 <span>Ofertas</span>
             </button>
@@ -1375,12 +1375,12 @@
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
-            <button class="bottom-nav-item" data-page="favorites" aria-label="Ver Favoritos">
+            <button class="bottom-nav-item" data-page="favorites" aria-label="Ver Favoritos" onclick="window.openFavoritesModal()">
                 <i class="fas fa-heart"></i>
                 <span>Favoritos</span>
                 <span class="badge-count" id="favCountNavMobile" style="display: none; position: absolute; top: 4px; right: 8px; background: #D4AF37; color: #030303; font-size: 0.625rem; font-weight: 700; padding: 2px 5px; border-radius: 10px; min-width: 16px; text-align: center;">0</span>
             </button>
-            <button class="bottom-nav-item" data-page="testimonios" aria-label="Ir a Reseñas">
+            <button class="bottom-nav-item" data-page="testimonios" aria-label="Ir a Reseñas" onclick="window.navigateToSection('testimonios')">
                 <i class="fas fa-star"></i>
                 <span>Reseñas</span>
             </button>
@@ -1790,31 +1790,6 @@
         window.showFavoritesPanel = function() {
             openFavoritesModal();
         }
-
-        // BOTTOM NAV EVENT LISTENERS - Direct click handlers
-        // Usamos delegación de eventos para asegurar que funcione siempre
-        document.getElementById('bottomNav')?.addEventListener('click', function(e) {
-            // Si es el botón de WhatsApp, dejar que funcione normalmente
-            if (e.target.closest('.bottom-nav-center-btn')) {
-                return; // No interferir con WhatsApp
-            }
-            
-            const button = e.target.closest('.bottom-nav-item');
-            
-            if (button) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const page = button.getAttribute('data-page');
-                console.log('Bottom nav click:', page);
-                
-                if (page === 'favorites') {
-                    window.openFavoritesModal();
-                } else if (page) {
-                    window.navigateToSection(page);
-                }
-            }
-        });
 
         // BOTTOM NAV ACTIVE STATE ON SCROLL
         const bottomNavItems = document.querySelectorAll('.bottom-nav-item');

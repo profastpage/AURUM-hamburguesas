@@ -1371,25 +1371,25 @@
     <!-- Bottom Navigation (Mobile) -->
     <div class="bottom-nav" id="bottomNav">
         <div class="bottom-nav-items">
-            <button onclick="navigateToSection('menu')" class="bottom-nav-item active" data-page="menu">
+            <button onclick="window.navigateToSection('menu')" class="bottom-nav-item active" data-page="menu" aria-label="Ir al Menú">
                 <i class="fas fa-hamburger"></i>
                 <span>Menú</span>
             </button>
-            <button onclick="navigateToSection('promociones')" class="bottom-nav-item" data-page="promociones">
+            <button onclick="window.navigateToSection('promociones')" class="bottom-nav-item" data-page="promociones" aria-label="Ir a Ofertas">
                 <i class="fas fa-tag"></i>
                 <span>Ofertas</span>
             </button>
             <div class="bottom-nav-center">
-                <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido" class="bottom-nav-center-btn" aria-label="Pedir por WhatsApp">
+                <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido" class="bottom-nav-center-btn" aria-label="Pedir por WhatsApp" target="_blank" rel="noopener">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
-            <button onclick="showFavoritesPanel()" class="bottom-nav-item" data-page="favorites">
+            <button onclick="window.openFavoritesModal()" class="bottom-nav-item" data-page="favorites" aria-label="Ver Favoritos">
                 <i class="fas fa-heart"></i>
                 <span>Favoritos</span>
                 <span class="badge-count" id="favCountNavMobile" style="display: none; position: absolute; top: 4px; right: 8px; background: #D4AF37; color: #030303; font-size: 0.625rem; font-weight: 700; padding: 2px 5px; border-radius: 10px; min-width: 16px; text-align: center;">0</span>
             </button>
-            <button onclick="navigateToSection('testimonios')" class="bottom-nav-item" data-page="testimonios">
+            <button onclick="window.navigateToSection('testimonios')" class="bottom-nav-item" data-page="testimonios" aria-label="Ir a Reseñas">
                 <i class="fas fa-star"></i>
                 <span>Reseñas</span>
             </button>
@@ -1590,8 +1590,26 @@
             }
         }
 
-        // FAVORITES MODAL
-        function openFavoritesModal() {
+        // BOTTOM NAV NAVIGATION - Make global
+        window.navigateToSection = function(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const navHeight = 80;
+                const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: sectionPosition - navHeight,
+                    behavior: 'smooth'
+                });
+
+                // Update active state
+                document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                    item.classList.toggle('active', item.getAttribute('data-page') === sectionId);
+                });
+            }
+        }
+
+        // FAVORITES MODAL - Make global
+        window.openFavoritesModal = function() {
             const modal = document.getElementById('favoritesModal');
             const modalBody = document.getElementById('favoritesModalBody');
             const favIds = Object.keys(favorites);
@@ -1602,7 +1620,7 @@
                         <i class="fas fa-heart-broken"></i>
                         <p>¿Tienes hambre?</p>
                         <p style="font-size: 0.875rem; color: #999; margin-top: 8px;">Explora nuestro menú y guarda tus hamburguesas favoritas</p>
-                        <button onclick="closeFavoritesModal(); navigateToSection('menu')" class="btn-gold px-8 py-4 rounded-full text-base mt-4">
+                        <button onclick="window.closeFavoritesModal(); window.navigateToSection('menu')" class="btn-gold px-8 py-4 rounded-full text-base mt-4">
                             <span><i class="fas fa-hamburger mr-2"></i>Ver Menú</span>
                         </button>
                     </div>
@@ -1652,13 +1670,15 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function closeFavoritesModal() {
+        // CLOSE FAVORITES MODAL - Make global
+        window.closeFavoritesModal = function() {
             const modal = document.getElementById('favoritesModal');
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        function removeFromFavorites(id) {
+        // REMOVE FROM FAVORITES - Make global
+        window.removeFromFavorites = function(id) {
             const burger = burgers.find(b => b.id === id);
             delete favorites[id];
             updateFavoritesCount();
@@ -1666,13 +1686,15 @@
             showToast(`${burger.name} eliminado de favoritos`, 'heart');
         }
 
-        function orderSingleFavorite(id) {
+        // ORDER SINGLE FAVORITE - Make global
+        window.orderSingleFavorite = function(id) {
             const burger = burgers.find(b => b.id === id);
             const message = `Hola, quiero pedir la hamburguesa *${burger.name}* - S/ ${burger.price.toFixed(2)}`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        function orderAllFavorites() {
+        // ORDER ALL FAVORITES - Make global
+        window.orderAllFavorites = function() {
             const favIds = Object.keys(favorites);
             const favBurgers = burgers.filter(b => favIds.includes(b.id.toString()));
             const total = favBurgers.reduce((sum, b) => sum + b.price, 0);

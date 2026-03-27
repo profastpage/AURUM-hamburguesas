@@ -64,7 +64,8 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: 0; }
-        body { background-color: #030303; color: #ffffff; overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+        body { background-color: #030303; color: #ffffff; overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; padding-top: 108px; }
+        @media (min-width: 768px) { body { padding-top: 124px; } }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; line-height: 1.1; letter-spacing: -0.02em; }
 
         /* Scrollbar */
@@ -74,7 +75,17 @@
 
         /* Glassmorphism */
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.06); }
-        .glass-nav { background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px); border-bottom: 1px solid rgba(212, 175, 55, 0.15); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+        .glass-nav { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(3, 3, 3, 0.98); 
+            backdrop-filter: blur(40px); 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15); 
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5); 
+            z-index: 9999;
+        }
         .glass-nav.scrolled { background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
 
         /* Premium Buttons */
@@ -374,21 +385,8 @@
         <p class="loader-tagline">Premium Gourmet Burgers</p>
     </div>
 
-    <!-- Urgency Banner -->
-    <div class="urgency-banner">
-        <p class="text-sm md:text-base text-red-400 font-medium">
-            <i class="fas fa-fire mr-2"></i>
-            <span class="hidden md:inline">🔥</span>
-            Pedido mínimo S/ 35 para delivery gratis •
-            <span class="text-gold-400">Entrega en 40 min o menos</span>
-            <span class="hidden md:inline"> • </span>
-            <span class="md:hidden"><br></span>
-            <span class="text-gold-400 font-bold">¡Solo 3 promociones disponibles hoy!</span>
-        </p>
-    </div>
-
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav" id="navbar">
+    <nav class="glass-nav" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 md:h-20">
                 <a href="#" class="text-2xl md:text-3xl font-black font-display tracking-tight">
@@ -410,6 +408,19 @@
             </div>
         </div>
     </nav>
+
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        <p class="text-sm md:text-base text-red-400 font-medium">
+            <i class="fas fa-fire mr-2"></i>
+            <span class="hidden md:inline">🔥</span>
+            Pedido mínimo S/ 35 para delivery gratis •
+            <span class="text-gold-400">Entrega en 40 min o menos</span>
+            <span class="hidden md:inline"> • </span>
+            <span class="md:hidden"><br></span>
+            <span class="text-gold-400 font-bold">¡Solo 3 promociones disponibles hoy!</span>
+        </p>
+    </div>
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay">

@@ -63,7 +63,7 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 0; }
         body { background-color: #030303; color: #ffffff; overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; line-height: 1.1; letter-spacing: -0.02em; }
 
@@ -74,8 +74,8 @@
 
         /* Glassmorphism */
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.06); }
-        .glass-nav { background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(32px); border-bottom: 1px solid rgba(212, 175, 55, 0.08); }
-        .glass-nav.scrolled { background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px); border-bottom: 1px solid rgba(212, 175, 55, 0.15); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+        .glass-nav { background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px); border-bottom: 1px solid rgba(212, 175, 55, 0.15); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+        .glass-nav.scrolled { background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
 
         /* Premium Buttons */
         .btn-primary {
@@ -83,10 +83,11 @@
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: #fff; font-weight: 700;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             text-transform: uppercase; letter-spacing: 0.05em;
             box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
             animation: glow 2s ease-in-out infinite alternate;
+            white-space: nowrap;
         }
         .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 60px rgba(37, 211, 102, 0.6); }
         .btn-primary span { position: relative; z-index: 1; }
@@ -122,34 +123,39 @@
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1px solid rgba(212, 175, 55, 0.06);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            display: flex; flex-direction: column;
         }
         .product-card:hover { transform: translateY(-12px) scale(1.02); border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15); }
-        .product-card-img { position: relative; height: 280px; overflow: hidden; }
-        @media (min-width: 768px) { .product-card-img { height: 320px; } }
+        .product-card-img { position: relative; height: 240px; overflow: hidden; flex-shrink: 0; }
+        @media (min-width: 768px) { .product-card-img { height: 280px; } }
         .product-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(3,3,3,0.95) 100%); z-index: 2; }
         .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .product-card:hover .product-card-img img { transform: scale(1.08) rotate(1deg); }
+        .product-card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        @media (min-width: 768px) { .product-card-body { padding: 24px; } }
 
         /* Action Buttons */
         .action-btn {
-            width: 44px; height: 44px; border-radius: 14px;
+            width: 40px; height: 40px; border-radius: 12px;
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            font-size: 1.125rem;
+            font-size: 1rem;
         }
+        @media (min-width: 768px) { .action-btn { width: 44px; height: 44px; font-size: 1.125rem; } }
         .action-btn:hover { background: rgba(212, 175, 55, 0.9); border-color: #D4AF37; color: #030303; transform: scale(1.08); }
         .action-btn.active { background: #D4AF37; border-color: #D4AF37; color: #030303; }
         .action-btn.like-active { background: linear-gradient(135deg, #B22222, #8B0000); border-color: #B22222; animation: heartbeat 0.5s; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.15); } 50% { transform: scale(1); } 75% { transform: scale(1.1); } }
 
         /* Badges */
-        .badge { position: absolute; padding: 8px 16px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; z-index: 5; backdrop-filter: blur(8px); }
-        .badge-popular { top: 16px; left: 16px; background: linear-gradient(135deg, rgba(29,185,84,0.95), rgba(18,140,126,0.95)); color: #fff; box-shadow: 0 4px 20px rgba(29,185,84,0.4); }
-        .badge-new { top: 16px; left: 16px; background: linear-gradient(135deg, rgba(212,175,55,0.95), rgba(184,134,11,0.95)); color: #030303; box-shadow: 0 4px 20px rgba(212,175,55,0.4); }
-        .badge-spicy { top: 16px; left: 16px; background: linear-gradient(135deg, rgba(178,34,34,0.95), rgba(139,0,0,0.95)); color: #fff; box-shadow: 0 4px 20px rgba(178,34,34,0.4); }
-        .badge-urgent { top: 16px; right: 16px; left: auto; background: linear-gradient(135deg, #DC2626, #991B1B); color: #fff; box-shadow: 0 4px 20px rgba(220,38,38,0.4); animation: pulse 2s infinite; }
+        .badge { position: absolute; padding: 6px 14px; border-radius: 100px; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; z-index: 5; backdrop-filter: blur(8px); }
+        @media (min-width: 768px) { .badge { padding: 8px 16px; font-size: 0.75rem; } }
+        .badge-popular { top: 12px; left: 12px; background: linear-gradient(135deg, rgba(29,185,84,0.95), rgba(18,140,126,0.95)); color: #fff; box-shadow: 0 4px 20px rgba(29,185,84,0.4); }
+        .badge-new { top: 12px; left: 12px; background: linear-gradient(135deg, rgba(212,175,55,0.95), rgba(184,134,11,0.95)); color: #030303; box-shadow: 0 4px 20px rgba(212,175,55,0.4); }
+        .badge-spicy { top: 12px; left: 12px; background: linear-gradient(135deg, rgba(178,34,34,0.95), rgba(139,0,0,0.95)); color: #fff; box-shadow: 0 4px 20px rgba(178,34,34,0.4); }
+        .badge-urgent { top: 12px; right: 12px; left: auto; background: linear-gradient(135deg, #DC2626, #991B1B); color: #fff; box-shadow: 0 4px 20px rgba(220,38,38,0.4); animation: pulse 2s infinite; }
 
         /* Toast */
         .toast {
@@ -176,29 +182,32 @@
         /* Feature Cards */
         .feature-card {
             position: relative; background: linear-gradient(145deg, rgba(18,18,18,0.8), rgba(10,10,10,0.9));
-            padding: 48px 32px; border-radius: 24px; text-align: center;
+            padding: 40px 24px; border-radius: 24px; text-align: center;
             border: 1px solid rgba(212, 175, 55, 0.06);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        @media (min-width: 768px) { .feature-card { padding: 48px 32px; } }
         .feature-card:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-10px); box-shadow: 0 30px 80px rgba(212, 175, 55, 0.1); }
         .feature-icon {
-            width: 88px; height: 88px; margin: 0 auto 28px;
+            width: 80px; height: 80px; margin: 0 auto 24px;
             background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
             border-radius: 24px; display: flex; align-items: center; justify-content: center;
-            font-size: 2.25rem; color: #D4AF37; transition: all 0.5s;
+            font-size: 2rem; color: #D4AF37; transition: all 0.5s;
         }
+        @media (min-width: 768px) { .feature-icon { width: 88px; height: 88px; font-size: 2.25rem; } }
         .feature-card:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
 
         /* Testimonial Cards */
         .testimonial-card {
             position: relative; background: linear-gradient(145deg, rgba(18,18,18,0.9), rgba(10,10,10,0.95));
-            padding: 40px 32px; border-radius: 24px;
+            padding: 32px 24px; border-radius: 24px;
             border: 1px solid rgba(212, 175, 55, 0.06);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        @media (min-width: 768px) { .testimonial-card { padding: 48px 40px; } }
+        @media (min-width: 768px) { .testimonial-card { padding: 40px 32px; } }
         .testimonial-card:hover { border-color: rgba(212, 175, 55, 0.25); transform: translateY(-8px); }
-        .testimonial-card::before { content: '"'; position: absolute; top: 24px; left: 32px; font-size: 120px; font-family: 'Playfair Display', serif; color: rgba(212, 175, 55, 0.08); line-height: 1; }
+        .testimonial-card::before { content: '"'; position: absolute; top: 20px; left: 24px; font-size: 80px; font-family: 'Playfair Display', serif; color: rgba(212, 175, 55, 0.08); line-height: 1; }
+        @media (min-width: 768px) { .testimonial-card::before { font-size: 120px; top: 24px; left: 32px; } }
 
         /* Stats */
         .stat-number {
@@ -224,26 +233,26 @@
             position: fixed; bottom: 0; left: 0; right: 0;
             background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px);
             border-top: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 10px 16px calc(16px + env(safe-area-inset-bottom));
+            padding: 8px 16px calc(12px + env(safe-area-inset-bottom));
             z-index: 1000; display: none;
         }
-        @media (max-width: 768px) { .bottom-nav { display: flex; } }
+        @media (max-width: 768px) { .bottom-nav { display: block; } }
         .bottom-nav-items { display: flex; justify-content: space-around; align-items: center; width: 100%; }
-        .bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 12px; color: #666; transition: all 0.3s; cursor: pointer; position: relative; }
-        .bottom-nav-item i { font-size: 1.25rem; transition: all 0.3s; }
-        .bottom-nav-item span { font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 10px; color: #666; transition: all 0.3s; cursor: pointer; position: relative; }
+        .bottom-nav-item i { font-size: 1.2rem; transition: all 0.3s; }
+        .bottom-nav-item span { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
         .bottom-nav-item.active { color: #D4AF37; }
         .bottom-nav-item.active i { transform: translateY(-3px); filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.5)); }
-        .bottom-nav-center { position: relative; margin-top: -28px; }
+        .bottom-nav-center { position: relative; margin-top: -24px; }
         .bottom-nav-center-btn {
-            width: 56px; height: 56px; border-radius: 50%;
+            width: 52px; height: 52px; border-radius: 50%;
             background: linear-gradient(135deg, #25D366, #128C7E);
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(3,3,3,0.98);
             transition: all 0.3s; cursor: pointer;
         }
         .bottom-nav-center-btn:hover { transform: scale(1.08) translateY(-4px); }
-        .bottom-nav-center-btn i { color: #fff; font-size: 1.5rem; }
+        .bottom-nav-center-btn i { color: #fff; font-size: 1.4rem; }
 
         /* Loader */
         .loader { position: fixed; inset: 0; background: #030303; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; transition: all 0.6s; }
@@ -254,20 +263,14 @@
         .loader-ring::before { content: ''; position: absolute; inset: 30px; border: 1px solid transparent; border-top-color: rgba(212, 175, 55, 0.5); border-radius: 50%; animation: spin 1.5s infinite reverse; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Gallery */
-        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 250px); gap: 20px; } .gallery-item-large { grid-column: span 2; grid-row: span 2; } }
-        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
-        .gallery-item:hover img { transform: scale(1.1); }
-
         /* Promo Cards */
         .promo-card { position: relative; border-radius: 28px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); transition: all 0.5s; }
         .promo-card:hover { transform: translateY(-8px); border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15); }
-        .promo-card-img { width: 100%; height: 300px; object-fit: cover; transition: transform 0.8s; }
+        .promo-card-img { width: 100%; height: 280px; object-fit: cover; transition: transform 0.8s; }
         @media (min-width: 768px) { .promo-card-img { height: 350px; } }
         .promo-card:hover .promo-card-img { transform: scale(1.05); }
-        .promo-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(180deg, transparent 0%, rgba(3,3,3,0.95) 100%); }
+        .promo-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(180deg, transparent 0%, rgba(3,3,3,0.95) 100%); }
+        @media (min-width: 768px) { .promo-card-content { padding: 32px; } }
 
         /* Urgency Banner */
         .urgency-banner {
@@ -284,18 +287,19 @@
         .hero-slide.active { opacity: 1; }
         .hero-slide-img { width: 100%; height: 100%; object-fit: cover; }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3,3,3,0.4) 0%, rgba(3,3,3,0.7) 50%, rgba(3,3,3,0.95) 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 100px 20px 80px; max-width: 5xl; margin: 0 auto; }
-        
+        .hero-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 20px 100px; max-width: 5xl; margin: 0 auto; }
+
         /* Hero Slider Indicators */
-        .hero-indicators { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 20; }
+        .hero-indicators { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 20; }
         .hero-indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid rgba(212,175,55,0.5); transition: all 0.4s; cursor: pointer; }
         .hero-indicator.active { background: #D4AF37; transform: scale(1.3); }
         .hero-indicator:hover { background: rgba(212,175,55,0.7); }
 
-        @media (max-width: 768px) {
-            .hero-content { padding: 90px 16px 100px; }
-            .hero-indicators { bottom: 100px; }
-        }
+        /* Parallax Section */
+        .parallax-section { position: relative; overflow: hidden; }
+        .parallax-bg { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; background-size: cover; background-position: center; z-index: 0; will-change: transform; }
+        .parallax-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(3,3,3,0.92) 0%, rgba(3,3,3,0.85) 100%); }
+        .parallax-content { position: relative; z-index: 10; }
 
         /* Gradient Orbs */
         .gradient-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; pointer-events: none; }
@@ -312,6 +316,50 @@
         .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
         .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        /* WhatsApp Widget Desktop */
+        .whatsapp-widget-desktop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 40px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(3,3,3,0.9);
+            z-index: 999;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        @media (min-width: 769px) {
+            .whatsapp-widget-desktop { display: flex; }
+        }
+        .whatsapp-widget-desktop:hover { transform: scale(1.12); box-shadow: 0 15px 60px rgba(37, 211, 102, 0.6); }
+        .whatsapp-widget-desktop i { color: #fff; font-size: 1.875rem; }
+        .whatsapp-pulse { position: absolute; inset: -8px; border-radius: 50%; border: 2px solid #25D366; animation: pulse-ring 2s infinite; }
+        @keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        /* Footer Credits */
+        .footer-credits {
+            background: rgba(0,0,0,0.5);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer-credits a {
+            color: #D4AF37;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-credits a:hover {
+            color: #F4D03F;
+            text-decoration: underline;
+        }
 
         ::selection { background: rgba(212, 175, 55, 0.3); color: #fff; }
         *:focus-visible { outline: 2px solid #D4AF37; outline-offset: 2px; }
@@ -340,9 +388,9 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-500 glass-nav" id="navbar">
+    <nav class="fixed w-full z-50 glass-nav" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-16 md:h-20">
                 <a href="#" class="text-2xl md:text-3xl font-black font-display tracking-tight">
                     <span class="text-white">AURUM</span><span class="text-gold-500">.</span>
                 </a>
@@ -350,7 +398,7 @@
                     <a href="#menu" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Menú</a>
                     <a href="#promociones" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Promociones</a>
                     <a href="#testimonios" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Reseñas</a>
-                    <a href="https://wa.me/51999999999?text=Hola,%20quiero%20hacer%20mi%20pedido" class="btn-primary px-6 py-2.5 rounded-full text-sm">
+                    <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido" class="btn-primary px-6 py-2.5 rounded-full text-sm">
                         <span><i class="fab fa-whatsapp"></i> Pedir Ahora</span>
                     </a>
                 </div>
@@ -368,7 +416,7 @@
         <a href="#menu" class="mobile-menu-link mobile-link">Menú</a>
         <a href="#promociones" class="mobile-menu-link mobile-link">Promociones</a>
         <a href="#testimonios" class="mobile-menu-link mobile-link">Reseñas</a>
-        <a href="https://wa.me/51999999999" class="btn-primary px-10 py-4 rounded-full mt-4 mobile-link">
+        <a href="https://wa.me/51919662011" class="btn-primary px-10 py-4 rounded-full mt-4 mobile-link">
             <span><i class="fab fa-whatsapp"></i> Pedir Ahora</span>
         </a>
     </div>
@@ -411,7 +459,7 @@
             </p>
 
             <div class="reveal flex flex-col sm:flex-row gap-4 justify-center mb-8" style="transition-delay: 300ms;">
-                <a href="https://wa.me/51999999999?text=Hola,%20quiero%20hacer%20mi%20primer%20pedido" class="btn-primary px-10 py-5 rounded-full text-base shadow-lg">
+                <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20primer%20pedido" class="btn-primary px-10 py-5 rounded-full text-base shadow-lg">
                     <span><i class="fab fa-whatsapp text-xl"></i> Pedir por WhatsApp</span>
                 </a>
                 <a href="#menu" class="btn-secondary px-10 py-5 rounded-full text-base backdrop-blur-sm">
@@ -496,18 +544,19 @@
             <!-- CTA After Menu -->
             <div class="text-center mt-16 reveal">
                 <p class="text-gray-400 mb-6 font-light">¿No sabes cuál elegir?</p>
-                <a href="https://wa.me/51999999999?text=Hola,%20necesito%20ayuda%20para%20elegir%20mi%20hamburguesa" class="btn-secondary px-8 py-4 rounded-full">
+                <a href="https://wa.me/51919662011?text=Hola,%20necesito%20ayuda%20para%20elegir%20mi%20hamburguesa" class="btn-secondary px-8 py-4 rounded-full">
                     <span><i class="fas fa-comments"></i> Te Ayudamos a Elegir</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- PROMOTIONS -->
-    <section id="promociones" class="py-20 md:py-24 bg-dark-950 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, #D4AF37 1px, transparent 0); background-size: 40px 40px;"></div>
+    <!-- PROMOTIONS with Parallax -->
+    <section id="promociones" class="parallax-section py-20 md:py-24 relative">
+        <div class="parallax-bg" id="promoBg" style="background-image: url('https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=1920&q=80');"></div>
+        <div class="parallax-overlay"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="parallax-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 md:mb-16 reveal">
                 <span class="inline-block px-5 py-2.5 rounded-full glass text-red-400 text-xs font-bold tracking-widest uppercase mb-4 animate-pulse">
                     <i class="fas fa-clock mr-1"></i> Tiempo Limitado
@@ -536,7 +585,7 @@
                                 <span class="text-gray-500 line-through text-sm">S/ 84.80</span>
                                 <span class="text-3xl font-bold text-gold-400 ml-3">S/ 59.90</span>
                             </div>
-                            <a href="https://wa.me/51999999999?text=Hola,%20quiero%20el%20Combo%20Duo%20Perfecto" class="btn-primary px-6 py-3 rounded-full text-sm">
+                            <a href="https://wa.me/51919662011?text=Hola,%20quiero%20el%20Combo%20Duo%20Perfecto" class="btn-primary px-6 py-3 rounded-full text-sm">
                                 <span>Pedir Ahora</span>
                             </a>
                         </div>
@@ -557,7 +606,7 @@
                                 <span class="text-gray-500 line-through text-sm">S/ 58.70</span>
                                 <span class="text-3xl font-bold text-gold-400 ml-3">S/ 45.90</span>
                             </div>
-                            <a href="https://wa.me/51999999999?text=Hola,%20quiero%20el%20Pack%20Inferno" class="btn-primary px-6 py-3 rounded-full text-sm">
+                            <a href="https://wa.me/51919662011?text=Hola,%20quiero%20el%20Pack%20Inferno" class="btn-primary px-6 py-3 rounded-full text-sm">
                                 <span>Pedir Ahora</span>
                             </a>
                         </div>
@@ -618,7 +667,7 @@
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos R." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Carlos R.</h4>
-                            <p class="text-gray-500 text-xs">🇲 Ciudad de México</p>
+                            <p class="text-gray-500 text-xs">🇲🇽 Ciudad de México</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
@@ -644,7 +693,7 @@
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Juan L." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Juan L.</h4>
-                            <p class="text-gray-500 text-xs">🇦🇷 Buenos Aires</p>
+                            <p class="text-gray-500 text-xs">🇦 Buenos Aires</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
@@ -657,7 +706,7 @@
                         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Valentina S." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Valentina S.</h4>
-                            <p class="text-gray-500 text-xs">🇨 Santiago</p>
+                            <p class="text-gray-500 text-xs">🇨🇱 Santiago</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
@@ -670,7 +719,7 @@
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Diego M." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Diego M.</h4>
-                            <p class="text-gray-500 text-xs">🇪🇨 Quito</p>
+                            <p class="text-gray-500 text-xs">🇪 Quito</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
@@ -683,7 +732,7 @@
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Andrea P." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Andrea P.</h4>
-                            <p class="text-gray-500 text-xs">🇵🇪 Lima</p>
+                            <p class="text-gray-500 text-xs">🇵 Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
@@ -708,7 +757,7 @@
                 Tu hamburguesa gourmet te está esperando.
                 <span class="text-white font-medium">Pedido mínimo S/ 35 • Delivery gratis</span>
             </p>
-            <a href="https://wa.me/51999999999?text=Hola,%20quiero%20hacer%20mi%20pedido%20ahora" class="btn-primary px-12 py-6 rounded-full text-lg shadow-xl inline-flex items-center gap-3">
+            <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido%20ahora" class="btn-primary px-12 py-6 rounded-full text-lg shadow-xl inline-flex items-center gap-3">
                 <i class="fab fa-whatsapp text-2xl"></i>
                 <span>Pedir por WhatsApp Ahora</span>
             </a>
@@ -742,6 +791,19 @@
         </div>
     </footer>
 
+    <!-- Footer Credits -->
+    <div class="footer-credits">
+        <p class="text-gray-500 text-sm">
+            Creado y desarrollado por <a href="https://wa.me/51919662011?text=Me%20intereso%20la%20WEB%20de%20AURUM%20HAMBURGUESAS%2C%20quiero%20desarrollar%20mi%20web%2C%20mas%20informaci%C3%B3n..." target="_blank" rel="noopener">FastPagePro</a>
+        </p>
+    </div>
+
+    <!-- WhatsApp Widget Desktop -->
+    <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido" class="whatsapp-widget-desktop" aria-label="Contactar por WhatsApp">
+        <div class="whatsapp-pulse"></div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <!-- Bottom Navigation (Mobile) -->
     <div class="bottom-nav" id="bottomNav">
         <div class="bottom-nav-items">
@@ -754,7 +816,7 @@
                 <span>Ofertas</span>
             </a>
             <div class="bottom-nav-center">
-                <a href="https://wa.me/51999999999" class="bottom-nav-center-btn">
+                <a href="https://wa.me/51919662011" class="bottom-nav-center-btn">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
@@ -778,7 +840,7 @@
 
     <script>
         // CONFIG
-        const WHATSAPP_NUMBER = "51999999999";
+        const WHATSAPP_NUMBER = "51919662011";
 
         // DATA
         const burgers = [
@@ -844,7 +906,7 @@
         // NAVBAR
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => { 
-            navbar.classList.toggle('scrolled', window.scrollY > 100); 
+            navbar.classList.toggle('scrolled', window.scrollY > 50); 
         });
 
         // MOBILE MENU
@@ -889,13 +951,13 @@
                             </button>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="product-card-body">
                         <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-xl font-bold text-white">${burger.name}</h3>
-                            <span class="text-gold-400 font-bold text-xl">S/ ${burger.price.toFixed(2)}</span>
+                            <h3 class="text-lg md:text-xl font-bold text-white">${burger.name}</h3>
+                            <span class="text-gold-400 font-bold text-lg md:text-xl">S/ ${burger.price.toFixed(2)}</span>
                         </div>
-                        <p class="text-gray-400 text-sm mb-5 leading-relaxed font-light">${burger.desc}</p>
-                        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20quiero%20pedir%20la%20hamburguesa%20${encodeURIComponent(burger.name)}" class="btn-primary w-full py-3.5 rounded-full text-sm">
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed font-light flex-grow">${burger.desc}</p>
+                        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20quiero%20pedir%20la%20hamburguesa%20${encodeURIComponent(burger.name)}" class="btn-primary w-full py-3 rounded-full text-sm">
                             <span><i class="fab fa-whatsapp"></i> Pedir Esta</span>
                         </a>
                     </div>
@@ -1023,6 +1085,30 @@
                 }
             });
         });
+
+        // PARALLAX EFFECT FOR PROMOS
+        let scrollY = 0;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.innerWidth <= 768;
+
+        function animateParallax() {
+            if (!prefersReducedMotion && !isMobile) {
+                const promoSection = document.getElementById('promociones');
+                const promoBg = document.getElementById('promoBg');
+                
+                if (promoSection && promoBg) {
+                    const rect = promoSection.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                        promoBg.style.transform = `translate3d(0, ${scrollProgress * 100}px, 0)`;
+                    }
+                }
+            }
+            requestAnimationFrame(animateParallax);
+        }
+        
+        window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+        if (!prefersReducedMotion && !isMobile) animateParallax();
 
         // SMOOTH SCROLL
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

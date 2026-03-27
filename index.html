@@ -205,6 +205,49 @@
         .toast-icon.star { background: rgba(212,175,55,0.15); color: #D4AF37; }
         .toast-message { color: #fff; font-weight: 500; font-size: 0.9375rem; white-space: pre-line; }
 
+        /* FAQ Styles */
+        .faq-item {
+            background: linear-gradient(145deg, rgba(18,18,18,0.8), rgba(10,10,10,0.9));
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faq-item:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+        }
+        .faq-question i {
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faq-answer p {
+            padding: 0 24px 20px 24px;
+            line-height: 1.7;
+        }
+        .faq-answer.active {
+            max-height: 300px;
+        }
+
         /* Favorites Modal */
         .favorites-modal {
             position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
@@ -843,20 +886,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="reveal text-center">
-                    <div class="stat-number" data-target="15000">0</div>
+                    <div class="stat-number" data-target="15000">15,000+</div>
                     <p class="text-gray-500 mt-2 text-sm font-medium">Pedidos Entregados</p>
                 </div>
                 <div class="reveal text-center" style="transition-delay: 100ms;">
-                    <div class="stat-number" data-target="98">0</div>
-                    <p class="text-gray-500 mt-2 text-sm font-medium">% Clientes Satisfechos</p>
+                    <div class="stat-number" data-target="98">98%</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Clientes Satisfechos</p>
                 </div>
                 <div class="reveal text-center" style="transition-delay: 200ms;">
-                    <div class="stat-number" data-target="40">0</div>
-                    <p class="text-gray-500 mt-2 text-sm font-medium">Min Tiempo Promedio</p>
+                    <div class="stat-number" data-target="40">40 min</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Tiempo Promedio</p>
                 </div>
                 <div class="reveal text-center" style="transition-delay: 300ms;">
-                    <div class="stat-number" data-target="100">0</div>
-                    <p class="text-gray-500 mt-2 text-sm font-medium">% Ingredientes Frescos</p>
+                    <div class="stat-number" data-target="100">100%</div>
+                    <p class="text-gray-500 mt-2 text-sm font-medium">Ingredientes Frescos</p>
                 </div>
             </div>
         </div>
@@ -1010,82 +1053,82 @@
 
             <!-- Desktop Grid -->
             <div class="hidden md:grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 - Mexico -->
+                <!-- Testimonial 1 - Lima -->
                 <div class="testimonial-card reveal">
                     <div class="flex items-center gap-4 mb-6">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos R." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Carlos R.</h4>
-                            <p class="text-gray-500 text-xs">🇲🇽 Ciudad de México</p>
+                            <p class="text-gray-500 text-xs">🇵🇪 Miraflores, Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed font-light">"Las mejores hamburguesas de Lima. El pedido por WhatsApp es súper rápido y llega caliente. ¡Ya soy cliente frecuente!"</p>
+                    <p class="text-gray-400 leading-relaxed font-light">"Pedí la Aurum Classic y llegó en 35 minutos a Miraflores. La carne jugosa y el pan crujiente. ¡La mejor hamburguesa que probé en Lima!"</p>
                 </div>
 
-                <!-- Testimonial 2 - Colombia -->
+                <!-- Testimonial 2 - Lima -->
                 <div class="testimonial-card reveal" style="transition-delay: 100ms;">
                     <div class="flex items-center gap-4 mb-6">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="María A." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">María A.</h4>
-                            <p class="text-gray-500 text-xs">🇨🇴 Bogotá</p>
+                            <p class="text-gray-500 text-xs">🇵🇪 San Isidro, Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed font-light">"La Inferno es increíble. El nivel de picante es perfecto y los ingredientes se notan frescos. 100% recomendado."</p>
+                    <p class="text-gray-400 leading-relaxed font-light">"La Inferno es brutal. El picante justo y los ingredientes se sienten frescos. Pago con Yape y llegó rápido a mi oficina."</p>
                 </div>
 
-                <!-- Testimonial 3 - Argentina -->
+                <!-- Testimonial 3 - Lima -->
                 <div class="testimonial-card reveal" style="transition-delay: 200ms;">
                     <div class="flex items-center gap-4 mb-6">
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Juan L." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Juan L.</h4>
-                            <p class="text-gray-500 text-xs">🇦🇷 Buenos Aires</p>
+                            <p class="text-gray-500 text-xs">🇵🇪 Surco, Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed font-light">"Calidad premium a buen precio. La entrega fue en 35 minutos y la hamburguesa llegó perfecta. Volveré a pedir."</p>
+                    <p class="text-gray-400 leading-relaxed font-light">"El Combo Dúo es perfecto para dos. Precio justo y calidad premium. Ya pedí 3 veces esta semana."</p>
                 </div>
 
-                <!-- Testimonial 4 - Chile -->
+                <!-- Testimonial 4 - Lima -->
                 <div class="testimonial-card reveal">
                     <div class="flex items-center gap-4 mb-6">
                         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Valentina S." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Valentina S.</h4>
-                            <p class="text-gray-500 text-xs">🇨🇱 Santiago</p>
+                            <p class="text-gray-500 text-xs">🇵🇪 Barranco, Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed font-light">"La Truffle Deluxe es una experiencia única. El queso suizo y la trufa negra hacen la diferencia. ¡Vale cada sol!"</p>
+                    <p class="text-gray-400 leading-relaxed font-light">"La Truffle Deluxe vale cada sol. El queso suizo y la trufa se sienten de verdad. Delivery rápido a Barranco."</p>
                 </div>
 
-                <!-- Testimonial 5 - Ecuador -->
+                <!-- Testimonial 5 - Callao -->
                 <div class="testimonial-card reveal" style="transition-delay: 100ms;">
                     <div class="flex items-center gap-4 mb-6">
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Diego M." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Diego M.</h4>
-                            <p class="text-gray-500 text-xs">🇪🇨 Quito</p>
+                            <p class="text-gray-500 text-xs">🇵🇪 Callao, Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed font-light">"Pedí el Combo Dúo y fue suficiente para dos. La relación calidad-precio es increíble. Definitivamente volveré."</p>
+                    <p class="text-gray-400 leading-relaxed font-light">"Pensé que no llegaban al Callao pero sí entregan. La Bacon King es increíble. Llegó caliente y bien empacada."</p>
                 </div>
 
-                <!-- Testimonial 6 - Perú -->
+                <!-- Testimonial 6 - Lima -->
                 <div class="testimonial-card reveal" style="transition-delay: 200ms;">
                     <div class="flex items-center gap-4 mb-6">
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Andrea P." class="w-14 h-14 rounded-full object-cover" loading="lazy">
                         <div>
                             <h4 class="text-white font-bold">Andrea P.</h4>
-                            <p class="text-gray-500 text-xs">🇵🇪 Lima</p>
+                            <p class="text-gray-500 text-xs">🇵🇪 La Molina, Lima</p>
                             <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed font-light">"Como limeña, soy exigente con la comida. Aurum superó mis expectativas. La Bacon King es mi favorita."</p>
+                    <p class="text-gray-400 leading-relaxed font-light">"Como limeña soy exigente con la comida. Aurum superó mis expectativas. La Veggie Gold también es excelente."</p>
                 </div>
             </div>
 
@@ -1093,77 +1136,77 @@
             <div class="md:hidden relative">
                 <div class="testimonial-carousel-container" id="testimonialCarousel">
                     <div class="testimonial-carousel-track" id="testimonialTrack">
-                        <!-- Testimonial 1 -->
+                        <!-- Testimonial 1 - Lima -->
                         <div class="testimonial-card-mobile">
                             <div class="flex items-center gap-4 mb-6">
                                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos R." class="w-14 h-14 rounded-full object-cover">
                                 <div>
                                     <h4 class="text-white font-bold">Carlos R.</h4>
-                                    <p class="text-gray-500 text-xs">🇲🇽 Ciudad de México</p>
+                                    <p class="text-gray-500 text-xs">🇵🇪 Miraflores, Lima</p>
                                     <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed font-light">"Las mejores hamburguesas de Lima. El pedido por WhatsApp es súper rápido y llega caliente. ¡Ya soy cliente frecuente!"</p>
+                            <p class="text-gray-400 leading-relaxed font-light">"Pedí la Aurum Classic y llegó en 35 minutos a Miraflores. La carne jugosa y el pan crujiente. ¡La mejor hamburguesa que probé en Lima!"</p>
                         </div>
-                        <!-- Testimonial 2 -->
+                        <!-- Testimonial 2 - Lima -->
                         <div class="testimonial-card-mobile">
                             <div class="flex items-center gap-4 mb-6">
                                 <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="María A." class="w-14 h-14 rounded-full object-cover">
                                 <div>
                                     <h4 class="text-white font-bold">María A.</h4>
-                                    <p class="text-gray-500 text-xs">🇨🇴 Bogotá</p>
+                                    <p class="text-gray-500 text-xs">🇵🇪 San Isidro, Lima</p>
                                     <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed font-light">"La Inferno es increíble. El nivel de picante es perfecto y los ingredientes se notan frescos. 100% recomendado."</p>
+                            <p class="text-gray-400 leading-relaxed font-light">"La Inferno es brutal. El picante justo y los ingredientes se sienten frescos. Pago con Yape y llegó rápido a mi oficina."</p>
                         </div>
-                        <!-- Testimonial 3 -->
+                        <!-- Testimonial 3 - Lima -->
                         <div class="testimonial-card-mobile">
                             <div class="flex items-center gap-4 mb-6">
                                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Juan L." class="w-14 h-14 rounded-full object-cover">
                                 <div>
                                     <h4 class="text-white font-bold">Juan L.</h4>
-                                    <p class="text-gray-500 text-xs">🇦🇷 Buenos Aires</p>
+                                    <p class="text-gray-500 text-xs">🇵🇪 Surco, Lima</p>
                                     <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed font-light">"Calidad premium a buen precio. La entrega fue en 35 minutos y la hamburguesa llegó perfecta. Volveré a pedir."</p>
+                            <p class="text-gray-400 leading-relaxed font-light">"El Combo Dúo es perfecto para dos. Precio justo y calidad premium. Ya pedí 3 veces esta semana."</p>
                         </div>
-                        <!-- Testimonial 4 -->
+                        <!-- Testimonial 4 - Lima -->
                         <div class="testimonial-card-mobile">
                             <div class="flex items-center gap-4 mb-6">
                                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Valentina S." class="w-14 h-14 rounded-full object-cover">
                                 <div>
                                     <h4 class="text-white font-bold">Valentina S.</h4>
-                                    <p class="text-gray-500 text-xs">🇨🇱 Santiago</p>
+                                    <p class="text-gray-500 text-xs">🇵🇪 Barranco, Lima</p>
                                     <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed font-light">"La Truffle Deluxe es una experiencia única. El queso suizo y la trufa negra hacen la diferencia. ¡Vale cada sol!"</p>
+                            <p class="text-gray-400 leading-relaxed font-light">"La Truffle Deluxe vale cada sol. El queso suizo y la trufa se sienten de verdad. Delivery rápido a Barranco."</p>
                         </div>
-                        <!-- Testimonial 5 -->
+                        <!-- Testimonial 5 - Callao -->
                         <div class="testimonial-card-mobile">
                             <div class="flex items-center gap-4 mb-6">
                                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Diego M." class="w-14 h-14 rounded-full object-cover">
                                 <div>
                                     <h4 class="text-white font-bold">Diego M.</h4>
-                                    <p class="text-gray-500 text-xs">🇪🇨 Quito</p>
+                                    <p class="text-gray-500 text-xs">🇵🇪 Callao, Lima</p>
                                     <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed font-light">"Pedí el Combo Dúo y fue suficiente para dos. La relación calidad-precio es increíble. Definitivamente volveré."</p>
+                            <p class="text-gray-400 leading-relaxed font-light">"Pensé que no llegaban al Callao pero sí entregan. La Bacon King es increíble. Llegó caliente y bien empacada."</p>
                         </div>
-                        <!-- Testimonial 6 -->
+                        <!-- Testimonial 6 - Lima -->
                         <div class="testimonial-card-mobile">
                             <div class="flex items-center gap-4 mb-6">
                                 <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face" alt="Andrea P." class="w-14 h-14 rounded-full object-cover">
                                 <div>
                                     <h4 class="text-white font-bold">Andrea P.</h4>
-                                    <p class="text-gray-500 text-xs">🇵🇪 Lima</p>
+                                    <p class="text-gray-500 text-xs">🇵🇪 La Molina, Lima</p>
                                     <div class="flex text-gold-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 </div>
                             </div>
-                            <p class="text-gray-400 leading-relaxed font-light">"Como limeña, soy exigente con la comida. Aurum superó mis expectativas. La Bacon King es mi favorita."</p>
+                            <p class="text-gray-400 leading-relaxed font-light">"Como limeña soy exigente con la comida. Aurum superó mis expectativas. La Veggie Gold también es excelente."</p>
                         </div>
                     </div>
                 </div>
@@ -1176,6 +1219,88 @@
                 </button>
                 <!-- Dots Indicator -->
                 <div class="testimonial-dots" id="testimonialDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 md:py-24 bg-dark-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <span class="inline-block px-5 py-2.5 rounded-full glass text-gold-400 text-xs font-bold tracking-widest uppercase mb-4">
+                    <i class="fas fa-question-circle mr-1"></i> FAQ
+                </span>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
+                    Preguntas <span class="text-gold-500">Frecuentes</span>
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-white font-semibold text-left">¿A qué zonas hacen delivery?</span>
+                        <i class="fas fa-chevron-down text-gold-500 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 font-light">Entregamos en todos los distritos de Lima Metropolitana: Miraflores, San Isidro, Surco, La Molina, Barranco, San Borja, Jesús María, Lince, Magdalena, Pueblo Libre, San Miguel, Callao, La Punta, y más. ¡Consulta tu distrito por WhatsApp!</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-white font-semibold text-left">¿Qué métodos de pago aceptan?</span>
+                        <i class="fas fa-chevron-down text-gold-500 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 font-light">Aceptamos Yape, Plin, transferencias BCP/Interbank, tarjetas de crédito/débito (Visa, Mastercard), y efectivo contra entrega. ¡Elige lo que más te convenga!</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-white font-semibold text-left">¿Cuál es el tiempo de entrega?</span>
+                        <i class="fas fa-chevron-down text-gold-500 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 font-light">Nuestro tiempo promedio es de 40 minutos. Si tu pedido tarda más, ¡tu próxima hamburguesa es gratis! Hacemos envíos a todo Lima.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-white font-semibold text-left">¿Hay pedido mínimo?</span>
+                        <i class="fas fa-chevron-down text-gold-500 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 font-light">Sí, el pedido mínimo es S/ 35 para delivery gratis. Si tu pedido es menor, tiene un cargo de envío de S/ 5. ¡Pero siempre vale la pena!</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-white font-semibold text-left">¿Tienen opciones vegetarianas?</span>
+                        <i class="fas fa-chevron-down text-gold-500 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 font-light">¡Sí! Nuestra Veggie Gold tiene medallón vegetal premium, aguacate fresco y queso vegano. 100% deliciosa, 0% carne.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span class="text-white font-semibold text-left">¿Cuál es su horario de atención?</span>
+                        <i class="fas fa-chevron-down text-gold-500 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 font-light">Atendemos de Martes a Domingo de 12:00 pm a 11:00 pm. Los Lunes cerramos por mantenimiento. ¡Pero puedes pedir hasta las 10:30 pm!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1800,12 +1925,28 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                if (href !== '#') { 
-                    e.preventDefault(); 
-                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+                if (href !== '#') {
+                    e.preventDefault();
+                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // FAQ TOGGLE
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                answer.classList.add('active');
+                button.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>

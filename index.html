@@ -422,59 +422,125 @@
         /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(40px);
-            border-top: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 8px 16px calc(12px + env(safe-area-inset-bottom));
+            background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(3,3,3,0.98) 100%);
+            backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px 12px calc(12px + env(safe-area-inset-bottom));
             z-index: 1000; display: none;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 -8px 32px rgba(0,0,0,0.8), 0 -2px 8px rgba(212,175,55,0.1);
         }
         @media (max-width: 768px) { .bottom-nav { display: block; } }
-        .bottom-nav-items { display: flex; justify-content: space-around; align-items: center; width: 100%; }
-        .bottom-nav-item { 
+        .bottom-nav-items { 
             display: flex; 
-            flex-direction: column; 
+            justify-content: space-around; 
             align-items: center; 
-            gap: 4px; 
-            padding: 8px 12px; 
-            color: #666; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; 
+            width: 100%;
             position: relative;
-            border-radius: 12px;
-            min-width: 60px;
         }
-        .bottom-nav-item:active { transform: scale(0.95); }
-        .bottom-nav-item i { font-size: 1.25rem; transition: all 0.3s; }
-        .bottom-nav-item span { font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s; }
-        .bottom-nav-item.active { 
-            color: #D4AF37; 
-            background: rgba(212, 175, 55, 0.1);
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 10px 14px;
+            color: #555;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            border-radius: 16px;
+            min-width: 64px;
+            background: transparent;
+            border: none;
         }
-        .bottom-nav-item.active i { 
-            transform: translateY(-4px); 
-            filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.5)); 
+        .bottom-nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(212,175,55,0.15) 0%, transparent 100%);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .bottom-nav-item:active { transform: scale(0.92); }
+        .bottom-nav-item i { 
+            font-size: 1.375rem; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+        }
+        .bottom-nav-item span { 
+            font-size: 0.625rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.08em; 
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .bottom-nav-item.active {
+            color: #D4AF37;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.2) 0%, rgba(212,175,55,0.05) 100%);
+            box-shadow: 0 4px 16px rgba(212,175,55,0.2);
+        }
+        .bottom-nav-item.active::before { opacity: 1; }
+        .bottom-nav-item.active i {
+            transform: translateY(-5px) scale(1.1);
+            filter: drop-shadow(0 6px 12px rgba(212, 175, 55, 0.6));
         }
         .bottom-nav-item.active span {
-            color: #D4AF37;
+            color: #F4D03F;
             font-weight: 800;
+            letter-spacing: 0.1em;
         }
-        .bottom-nav-center { position: relative; margin-top: -28px; }
+        .bottom-nav-item .badge-count {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            background: linear-gradient(135deg, #D4AF37, #B8860B);
+            color: #030303;
+            font-size: 0.625rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 12px;
+            min-width: 18px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(212,175,55,0.4);
+            z-index: 2;
+            animation: badge-pulse 2s infinite;
+        }
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .bottom-nav-center { 
+            position: relative; 
+            margin-top: -32px;
+            z-index: 10;
+        }
         .bottom-nav-center-btn {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            width: 68px; height: 68px; border-radius: 50%;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(3,3,3,0.98);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5), 0 0 0 5px rgba(10,10,10,0.98), 0 0 0 6px rgba(212,175,55,0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             animation: pulse-whatsapp 2s infinite;
+            border: 2px solid rgba(255,255,255,0.1);
         }
         @keyframes pulse-whatsapp {
-            0% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0); }
+            0% { 
+                box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5), 0 0 0 5px rgba(10,10,10,0.98), 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% { 
+                box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5), 0 0 0 5px rgba(10,10,10,0.98), 0 0 0 18px rgba(37, 211, 102, 0);
+            }
+            100% { 
+                box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5), 0 0 0 5px rgba(10,10,10,0.98), 0 0 0 0 rgba(37, 211, 102, 0);
+            }
         }
-        .bottom-nav-center-btn:active { transform: scale(0.95); }
-        .bottom-nav-center-btn i { color: #fff; font-size: 1.6rem; }
+        .bottom-nav-center-btn:active { transform: scale(0.92); }
+        .bottom-nav-center-btn i { color: #fff; font-size: 1.75rem; }
 
         /* Loader */
         .loader { position: fixed; inset: 0; background: #030303; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; transition: all 0.6s; }
@@ -1408,31 +1474,9 @@
             }
         }
 
-        // FAVORITES PANEL
+        // FAVORITES PANEL - Now opens modal
         function showFavoritesPanel() {
-            const favIds = Object.keys(favorites);
-            if (favIds.length === 0) {
-                showToast('No tienes favoritos aún. ¡Agrega hamburguesas a tu lista!', 'star');
-                return;
-            }
-            
-            // Show favorites in a nice panel
-            const favBurgers = burgers.filter(b => favIds.includes(b.id.toString()));
-            let favoritesList = '🍔 Tus Favoritos:\n\n';
-            favBurgers.forEach((burger, index) => {
-                favoritesList += `${index + 1}. ${burger.name} - S/ ${burger.price.toFixed(2)}\n`;
-            });
-            favoritesList += `\nTotal: ${favBurgers.length} hamburguesa(s)`;
-            favoritesList += `\n\n¿Quieres pedir tus favoritos?`;
-            
-            // Show toast with favorites summary
-            showToast(favoritesList, 'star');
-            
-            // After toast, offer to send order
-            setTimeout(() => {
-                const orderText = `Hola, quiero pedir mis hamburguesas favoritas:\n${favBurgers.map(b => `- ${b.name}`).join('\n')}\n\nTotal aproximado: S/ ${favBurgers.reduce((sum, b) => sum + b.price, 0).toFixed(2)}`;
-                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(orderText)}`, '_blank');
-            }, 3500);
+            openFavoritesModal();
         }
 
         // BOTTOM NAV ACTIVE STATE ON SCROLL

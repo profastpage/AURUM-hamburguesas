@@ -1316,13 +1316,14 @@
             <h2 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
                 ¿Tienes <span class="text-gold-500">Hambre</span>?
             </h2>
-            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light">
+            <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto font-light">
                 Tu hamburguesa gourmet te está esperando.
+                <br class="hidden md:block">
                 <span class="text-white font-medium">Pedido mínimo S/ 35 • Delivery gratis</span>
             </p>
-            <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido%20ahora" class="btn-primary px-12 py-6 rounded-full text-lg shadow-xl inline-flex items-center gap-3">
-                <i class="fab fa-whatsapp text-2xl"></i>
-                <span>Pedir por WhatsApp Ahora</span>
+            <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido%20ahora" class="btn-primary px-8 md:px-12 py-5 md:py-6 rounded-full text-base md:text-lg shadow-xl inline-flex items-center justify-center gap-3 w-full md:w-auto">
+                <i class="fab fa-whatsapp text-xl md:text-2xl"></i>
+                <span class="whitespace-nowrap">Pedir Ahora</span>
             </a>
             <p class="mt-6 text-gray-500 text-sm">
                 <i class="fas fa-check-circle text-green-500 mr-2"></i>Respuesta en menos de 2 minutos
@@ -1594,13 +1595,14 @@
             const modal = document.getElementById('favoritesModal');
             const modalBody = document.getElementById('favoritesModalBody');
             const favIds = Object.keys(favorites);
-            
+
             if (favIds.length === 0) {
                 modalBody.innerHTML = `
                     <div class="favorites-empty">
                         <i class="fas fa-heart-broken"></i>
-                        <p>No tienes favoritos aún</p>
-                        <button onclick="closeFavoritesModal(); navigateToSection('menu')" class="btn-gold px-6 py-3 rounded-full text-sm">
+                        <p>¿Tienes hambre?</p>
+                        <p style="font-size: 0.875rem; color: #999; margin-top: 8px;">Explora nuestro menú y guarda tus hamburguesas favoritas</p>
+                        <button onclick="closeFavoritesModal(); navigateToSection('menu')" class="btn-gold px-8 py-4 rounded-full text-base mt-4">
                             <span><i class="fas fa-hamburger mr-2"></i>Ver Menú</span>
                         </button>
                     </div>

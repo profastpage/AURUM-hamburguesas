@@ -1542,37 +1542,47 @@
             });
         });
 
-        // FAVORITES
-        function toggleFavorite(id) {
+        // FAVORITES - Make global and robust
+        window.toggleFavorite = function(id) {
             const burger = burgers.find(b => b.id === id);
             const btn = event.currentTarget;
 
             if (favorites[id]) {
                 delete favorites[id];
-                btn.classList.remove('like-active', 'active');
-                btn.querySelector('i').classList.remove('fas'); 
-                btn.querySelector('i').classList.add('far');
+                if (btn) {
+                    btn.classList.remove('like-active', 'active');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                    }
+                }
                 showToast(`${burger.name} eliminado de favoritos`, 'heart');
             } else {
                 favorites[id] = true;
-                btn.classList.add('like-active', 'active');
-                btn.querySelector('i').classList.remove('far'); 
-                btn.querySelector('i').classList.add('fas');
+                if (btn) {
+                    btn.classList.add('like-active', 'active');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                    }
+                }
                 showToast(`${burger.name} guardado en favoritos`, 'star');
             }
             updateFavoritesCount();
         }
 
-        function updateFavoritesCount() {
+        window.updateFavoritesCount = function() {
             const count = Object.keys(favorites).length;
-            
+
             // Update desktop navbar counter
             const favCountNavDesktop = document.getElementById('favCountNav');
             if (favCountNavDesktop) {
                 favCountNavDesktop.textContent = count;
                 favCountNavDesktop.style.display = count > 0 ? 'block' : 'none';
             }
-            
+
             // Update mobile bottom nav counter
             const favCountNavMobile = document.getElementById('favCountNavMobile');
             if (favCountNavMobile) {
@@ -1782,23 +1792,28 @@
         }
 
         // BOTTOM NAV EVENT LISTENERS - Direct click handlers
-        document.addEventListener('DOMContentLoaded', function() {
-            const bottomNavButtons = document.querySelectorAll('.bottom-nav-item');
+        // Usamos delegación de eventos para asegurar que funcione siempre
+        document.getElementById('bottomNav')?.addEventListener('click', function(e) {
+            // Si es el botón de WhatsApp, dejar que funcione normalmente
+            if (e.target.closest('.bottom-nav-center-btn')) {
+                return; // No interferir con WhatsApp
+            }
             
-            bottomNavButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const page = this.getAttribute('data-page');
-                    
-                    if (page === 'favorites') {
-                        window.openFavoritesModal();
-                    } else if (page) {
-                        window.navigateToSection(page);
-                    }
-                });
-            });
+            const button = e.target.closest('.bottom-nav-item');
+            
+            if (button) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const page = button.getAttribute('data-page');
+                console.log('Bottom nav click:', page);
+                
+                if (page === 'favorites') {
+                    window.openFavoritesModal();
+                } else if (page) {
+                    window.navigateToSection(page);
+                }
+            }
         });
 
         // BOTTOM NAV ACTIVE STATE ON SCROLL

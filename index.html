@@ -1678,7 +1678,7 @@
         window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
         if (!prefersReducedMotion && !isMobile) animateParallax();
 
-        // TESTIMONIAL CAROUSEL MOBILE
+        // TESTIMONIAL CAROUSEL MOBILE - User controlled only (no auto-scroll)
         function initTestimonialCarousel() {
             const track = document.getElementById('testimonialTrack');
             const container = document.getElementById('testimonialCarousel');
@@ -1693,7 +1693,6 @@
             const gap = 16;
             const totalCards = cards.length;
             let currentIndex = 0;
-            let autoScrollInterval;
             
             // Create dots
             cards.forEach((_, index) => {
@@ -1728,36 +1727,22 @@
                 goToSlide(currentIndex);
             }
             
-            // Auto-scroll every 4 seconds
-            function startAutoScroll() {
-                autoScrollInterval = setInterval(nextSlide, 4000);
-            }
-            
-            function stopAutoScroll() {
-                clearInterval(autoScrollInterval);
-            }
-            
-            // Arrow events
+            // Arrow events - only on user click
             arrowLeft?.addEventListener('click', () => {
                 prevSlide();
-                stopAutoScroll();
-                startAutoScroll();
             });
             
             arrowRight?.addEventListener('click', () => {
                 nextSlide();
-                stopAutoScroll();
-                startAutoScroll();
             });
             
-            // Touch events for swipe
+            // Touch events for swipe - user controlled
             let startX = 0;
             let isDragging = false;
             
             container.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
                 isDragging = true;
-                stopAutoScroll();
             }, { passive: true });
             
             container.addEventListener('touchmove', (e) => {
@@ -1771,20 +1756,17 @@
                     } else {
                         prevSlide();
                     }
-                    startAutoScroll();
                 }
             }, { passive: true });
             
             container.addEventListener('touchend', () => {
                 isDragging = false;
-                startAutoScroll();
             });
             
-            // Mouse events for desktop testing
+            // Mouse events for desktop testing - user controlled
             container.addEventListener('mousedown', (e) => {
                 startX = e.clientX;
                 isDragging = true;
-                stopAutoScroll();
             });
             
             container.addEventListener('mouseup', (e) => {
@@ -1797,11 +1779,9 @@
                     }
                 }
                 isDragging = false;
-                startAutoScroll();
             });
             
-            // Start auto-scroll
-            startAutoScroll();
+            // NO auto-scroll - user controls everything
         }
         
         // Initialize carousel on mobile

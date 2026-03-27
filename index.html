@@ -203,6 +203,167 @@
         .toast-icon.success { background: rgba(29,185,84,0.15); color: #1DB954; }
         .toast-icon.heart { background: rgba(178,34,34,0.15); color: #B22222; }
         .toast-icon.star { background: rgba(212,175,55,0.15); color: #D4AF37; }
+        .toast-message { color: #fff; font-weight: 500; font-size: 0.9375rem; white-space: pre-line; }
+
+        /* Favorites Modal */
+        .favorites-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+            z-index: 10000; display: none; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .favorites-modal.active { display: flex; animation: fadeIn 0.3s ease-out; }
+        .favorites-modal-content {
+            background: linear-gradient(145deg, rgba(18,18,18,0.98), rgba(10,10,10,0.98));
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+        }
+        .favorites-modal-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .favorites-modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .favorites-modal-close {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .favorites-modal-close:hover { background: rgba(212,175,55,0.3); color: #D4AF37; }
+        .favorites-modal-body { padding: 24px; }
+        .favorite-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(212,175,55,0.06);
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .favorite-item:last-child { margin-bottom: 0; }
+        .favorite-item-img {
+            width: 80px; height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .favorite-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .favorite-item-name {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .favorite-item-price {
+            color: #D4AF37;
+            font-weight: 700;
+            font-size: 0.9375rem;
+        }
+        .favorite-item-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .favorite-action-btn {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+        .favorite-remove {
+            background: rgba(178,34,34,0.2);
+            color: #B22222;
+        }
+        .favorite-remove:hover {
+            background: #B22222;
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .favorite-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+        }
+        .favorite-whatsapp:hover {
+            box-shadow: 0 8px 20px rgba(37,211,102,0.4);
+            transform: scale(1.05);
+        }
+        .favorites-modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .favorites-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+        .favorites-total-label { color: #999; }
+        .favorites-total-amount { color: #D4AF37; }
+        .favorites-order-all-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .favorites-order-all-btn:hover {
+            box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            transform: translateY(-2px);
+        }
+        .favorites-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        .favorites-empty i {
+            font-size: 4rem;
+            color: rgba(212,175,55,0.3);
+            margin-bottom: 16px;
+        }
+        .favorites-empty p {
+            font-size: 1.125rem;
+            margin-bottom: 20px;
+        }
+        .toast-icon.star { background: rgba(212,175,55,0.15); color: #D4AF37; }
         .toast-message { color: #fff; font-weight: 500; font-size: 0.9375rem; }
 
         /* Reveal */
@@ -447,10 +608,10 @@
                     <a href="#menu" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Menú</a>
                     <a href="#promociones" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Promociones</a>
                     <a href="#testimonios" class="text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors">Reseñas</a>
-                    <button onclick="toggleFavorites()" class="relative text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors flex items-center gap-2">
-                        <i class="fas fa-heart"></i>
-                        <span>Favoritos</span>
-                        <span class="badge-count" id="favCountNav" style="display: none; position: absolute; top: -8px; right: -12px; background: #D4AF37; color: #030303; font-size: 0.6875rem; font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center;">0</span>
+                    <button onclick="openFavoritesModal()" class="relative text-sm font-medium text-gray-300 hover:text-gold-400 transition-colors flex flex-col items-center gap-1">
+                        <span class="badge-count" id="favCountNav" style="display: none; position: absolute; top: -6px; right: -4px; background: #D4AF37; color: #030303; font-size: 0.625rem; font-weight: 700; padding: 2px 5px; border-radius: 10px; min-width: 16px; text-align: center; z-index: 10;">0</span>
+                        <i class="fas fa-heart text-lg"></i>
+                        <span class="text-xs">Favoritos</span>
                     </button>
                     <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido" class="btn-primary px-6 py-2.5 rounded-full text-sm">
                         <span><i class="fab fa-whatsapp"></i> Pedir Ahora</span>
@@ -886,6 +1047,19 @@
         </div>
     </div>
 
+    <!-- Favorites Modal -->
+    <div class="favorites-modal" id="favoritesModal">
+        <div class="favorites-modal-content">
+            <div class="favorites-modal-header">
+                <h3 class="favorites-modal-title"><i class="fas fa-heart text-gold-500 mr-2"></i>Mis Favoritos</h3>
+                <button class="favorites-modal-close" onclick="closeFavoritesModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="favorites-modal-body" id="favoritesModalBody">
+                <!-- Items se llenan dinámicamente -->
+            </div>
+        </div>
+    </div>
+
     <!-- Toast -->
     <div class="toast" id="toast">
         <div class="toast-icon success" id="toastIcon"><i class="fas fa-check-circle"></i></div>
@@ -923,7 +1097,7 @@
         function initHeroSlider() {
             const slides = document.querySelectorAll('.hero-slide');
             const indicators = document.querySelectorAll('.hero-indicator');
-            
+
             function showSlide(index) {
                 slides.forEach((slide, i) => {
                     slide.classList.toggle('active', i === index);
@@ -931,30 +1105,23 @@
                 });
                 currentSlide = index;
             }
-            
+
             function nextSlide() {
                 const next = (currentSlide + 1) % slides.length;
                 showSlide(next);
             }
-            
-            // Auto-advance every 3 seconds
+
+            // Auto-advance every 3 seconds - starts immediately on page load
             slideInterval = setInterval(nextSlide, 3000);
-            
-            // Click on indicators
+
+            // Click on indicators - change slide but continue auto-advance
             indicators.forEach((indicator, index) => {
                 indicator.addEventListener('click', () => {
-                    clearInterval(slideInterval);
                     showSlide(index);
-                    slideInterval = setInterval(nextSlide, 3000);
                 });
             });
-            
-            // Pause on hover
-            const heroSection = document.getElementById('inicio');
-            heroSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
-            heroSection.addEventListener('mouseleave', () => {
-                slideInterval = setInterval(nextSlide, 3000);
-            });
+
+            // NO pause on hover - slider runs continuously
         }
 
         // NAVBAR
@@ -1074,13 +1241,103 @@
             }
         }
 
-        function toggleFavorites() {
+        // FAVORITES MODAL
+        function openFavoritesModal() {
+            const modal = document.getElementById('favoritesModal');
+            const modalBody = document.getElementById('favoritesModalBody');
             const favIds = Object.keys(favorites);
+            
             if (favIds.length === 0) {
-                showToast('No tienes favoritos aún', 'star');
-                return;
+                modalBody.innerHTML = `
+                    <div class="favorites-empty">
+                        <i class="fas fa-heart-broken"></i>
+                        <p>No tienes favoritos aún</p>
+                        <button onclick="closeFavoritesModal(); navigateToSection('menu')" class="btn-gold px-6 py-3 rounded-full text-sm">
+                            <span><i class="fas fa-hamburger mr-2"></i>Ver Menú</span>
+                        </button>
+                    </div>
+                `;
+            } else {
+                const favBurgers = burgers.filter(b => favIds.includes(b.id.toString()));
+                const total = favBurgers.reduce((sum, b) => sum + b.price, 0);
+                
+                let html = '';
+                favBurgers.forEach(burger => {
+                    html += `
+                        <div class="favorite-item">
+                            <img src="${burger.img}" alt="${burger.name}" class="favorite-item-img" loading="lazy">
+                            <div class="favorite-item-info">
+                                <div class="favorite-item-name">${burger.name}</div>
+                                <div class="favorite-item-price">S/ ${burger.price.toFixed(2)}</div>
+                            </div>
+                            <div class="favorite-item-actions">
+                                <button class="favorite-action-btn favorite-remove" onclick="removeFromFavorites(${burger.id})" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="favorite-action-btn favorite-whatsapp" onclick="orderSingleFavorite(${burger.id})" title="Pedir por WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                    <div class="favorites-modal-footer">
+                        <div class="favorites-total">
+                            <span class="favorites-total-label">Total (${favBurgers.length} productos)</span>
+                            <span class="favorites-total-amount">S/ ${total.toFixed(2)}</span>
+                        </div>
+                        <button class="favorites-order-all-btn" onclick="orderAllFavorites()">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                            <span>Pedir Todos por WhatsApp</span>
+                        </button>
+                    </div>
+                `;
+                
+                modalBody.innerHTML = html;
             }
-            showToast(`${favIds.length} hamburguesas en favoritos`, 'star');
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFavoritesModal() {
+            const modal = document.getElementById('favoritesModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function removeFromFavorites(id) {
+            const burger = burgers.find(b => b.id === id);
+            delete favorites[id];
+            updateFavoritesCount();
+            openFavoritesModal(); // Refresh modal
+            showToast(`${burger.name} eliminado de favoritos`, 'heart');
+        }
+
+        function orderSingleFavorite(id) {
+            const burger = burgers.find(b => b.id === id);
+            const message = `Hola, quiero pedir la hamburguesa *${burger.name}* - S/ ${burger.price.toFixed(2)}`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function orderAllFavorites() {
+            const favIds = Object.keys(favorites);
+            const favBurgers = burgers.filter(b => favIds.includes(b.id.toString()));
+            const total = favBurgers.reduce((sum, b) => sum + b.price, 0);
+            
+            let message = `Hola, quiero pedir mis hamburguesas favoritas:\n\n`;
+            favBurgers.forEach((burger, index) => {
+                message += `${index + 1}. *${burger.name}* - S/ ${burger.price.toFixed(2)}\n`;
+            });
+            message += `\n*Total: S/ ${total.toFixed(2)}*`;
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function toggleFavorites() {
+            openFavoritesModal();
         }
 
         // TOAST
@@ -1219,6 +1476,13 @@
         
         window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
         if (!prefersReducedMotion && !isMobile) animateParallax();
+
+        // FAVORITES MODAL - Close on outside click
+        document.getElementById('favoritesModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'favoritesModal') {
+                closeFavoritesModal();
+            }
+        });
 
         // SMOOTH SCROLL
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -1371,11 +1371,11 @@
     <!-- Bottom Navigation (Mobile) -->
     <div class="bottom-nav" id="bottomNav">
         <div class="bottom-nav-items">
-            <button onclick="window.navigateToSection('menu')" class="bottom-nav-item active" data-page="menu" aria-label="Ir al Menú">
+            <button class="bottom-nav-item active" data-page="menu" aria-label="Ir al Menú">
                 <i class="fas fa-hamburger"></i>
                 <span>Menú</span>
             </button>
-            <button onclick="window.navigateToSection('promociones')" class="bottom-nav-item" data-page="promociones" aria-label="Ir a Ofertas">
+            <button class="bottom-nav-item" data-page="promociones" aria-label="Ir a Ofertas">
                 <i class="fas fa-tag"></i>
                 <span>Ofertas</span>
             </button>
@@ -1384,12 +1384,12 @@
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
-            <button onclick="window.openFavoritesModal()" class="bottom-nav-item" data-page="favorites" aria-label="Ver Favoritos">
+            <button class="bottom-nav-item" data-page="favorites" aria-label="Ver Favoritos">
                 <i class="fas fa-heart"></i>
                 <span>Favoritos</span>
                 <span class="badge-count" id="favCountNavMobile" style="display: none; position: absolute; top: 4px; right: 8px; background: #D4AF37; color: #030303; font-size: 0.625rem; font-weight: 700; padding: 2px 5px; border-radius: 10px; min-width: 16px; text-align: center;">0</span>
             </button>
-            <button onclick="window.navigateToSection('testimonios')" class="bottom-nav-item" data-page="testimonios" aria-label="Ir a Reseñas">
+            <button class="bottom-nav-item" data-page="testimonios" aria-label="Ir a Reseñas">
                 <i class="fas fa-star"></i>
                 <span>Reseñas</span>
             </button>
@@ -1762,28 +1762,53 @@
             }
         });
 
-        // BOTTOM NAV NAVIGATION
-        function navigateToSection(sectionId) {
+        // BOTTOM NAV NAVIGATION - Global function for onclick
+        window.navigateToSection = function(sectionId) {
+            console.log('Navigating to:', sectionId);
             const section = document.getElementById(sectionId);
             if (section) {
-                const navHeight = 80;
+                const navHeight = 100; // Aumentado para mayor seguridad
                 const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                
                 window.scrollTo({
                     top: sectionPosition - navHeight,
                     behavior: 'smooth'
                 });
-                
-                // Update active state
+
+                // Update active state immediately
                 document.querySelectorAll('.bottom-nav-item').forEach(item => {
-                    item.classList.toggle('active', item.getAttribute('data-page') === sectionId);
+                    const isActive = item.getAttribute('data-page') === sectionId;
+                    item.classList.toggle('active', isActive);
                 });
+            } else {
+                console.error('Section not found:', sectionId);
             }
         }
 
-        // FAVORITES PANEL - Now opens modal
-        function showFavoritesPanel() {
+        // FAVORITES PANEL - Global function
+        window.showFavoritesPanel = function() {
             openFavoritesModal();
         }
+
+        // BOTTOM NAV EVENT LISTENERS - Direct click handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            const bottomNavButtons = document.querySelectorAll('.bottom-nav-item');
+            
+            bottomNavButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const page = this.getAttribute('data-page');
+                    
+                    if (page === 'favorites') {
+                        window.openFavoritesModal();
+                    } else if (page) {
+                        window.navigateToSection(page);
+                    }
+                });
+            });
+        });
 
         // BOTTOM NAV ACTIVE STATE ON SCROLL
         const bottomNavItems = document.querySelectorAll('.bottom-nav-item');

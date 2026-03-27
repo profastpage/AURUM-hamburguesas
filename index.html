@@ -536,7 +536,7 @@
             backdrop-filter: blur(40px);
             border-top: 1px solid rgba(212, 175, 55, 0.2);
             padding: 8px 12px calc(12px + env(safe-area-inset-bottom));
-            z-index: 1000; display: none;
+            z-index: 99999 !important; display: none;
             box-shadow: 0 -8px 32px rgba(0,0,0,0.8), 0 -2px 8px rgba(212,175,55,0.1);
         }
         @media (max-width: 768px) { .bottom-nav { display: block; } }

@@ -265,24 +265,55 @@
             border-top: 1px solid rgba(212, 175, 55, 0.15);
             padding: 8px 16px calc(12px + env(safe-area-inset-bottom));
             z-index: 1000; display: none;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) { .bottom-nav { display: block; } }
         .bottom-nav-items { display: flex; justify-content: space-around; align-items: center; width: 100%; }
-        .bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 10px; color: #666; transition: all 0.3s; cursor: pointer; position: relative; }
-        .bottom-nav-item i { font-size: 1.2rem; transition: all 0.3s; }
-        .bottom-nav-item span { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-        .bottom-nav-item.active { color: #D4AF37; }
-        .bottom-nav-item.active i { transform: translateY(-3px); filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.5)); }
-        .bottom-nav-center { position: relative; margin-top: -24px; }
+        .bottom-nav-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; 
+            padding: 8px 12px; 
+            color: #666; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer; 
+            position: relative;
+            border-radius: 12px;
+            min-width: 60px;
+        }
+        .bottom-nav-item:active { transform: scale(0.95); }
+        .bottom-nav-item i { font-size: 1.25rem; transition: all 0.3s; }
+        .bottom-nav-item span { font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s; }
+        .bottom-nav-item.active { 
+            color: #D4AF37; 
+            background: rgba(212, 175, 55, 0.1);
+        }
+        .bottom-nav-item.active i { 
+            transform: translateY(-4px); 
+            filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.5)); 
+        }
+        .bottom-nav-item.active span {
+            color: #D4AF37;
+            font-weight: 800;
+        }
+        .bottom-nav-center { position: relative; margin-top: -28px; }
         .bottom-nav-center-btn {
-            width: 52px; height: 52px; border-radius: 50%;
+            width: 60px; height: 60px; border-radius: 50%;
             background: linear-gradient(135deg, #25D366, #128C7E);
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(3,3,3,0.98);
-            transition: all 0.3s; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer;
+            animation: pulse-whatsapp 2s infinite;
         }
-        .bottom-nav-center-btn:hover { transform: scale(1.08) translateY(-4px); }
-        .bottom-nav-center-btn i { color: #fff; font-size: 1.4rem; }
+        @keyframes pulse-whatsapp {
+            0% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .bottom-nav-center-btn:active { transform: scale(0.95); }
+        .bottom-nav-center-btn i { color: #fff; font-size: 1.6rem; }
 
         /* Loader */
         .loader { position: fixed; inset: 0; background: #030303; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; transition: all 0.6s; }
@@ -830,28 +861,28 @@
     <!-- Bottom Navigation (Mobile) -->
     <div class="bottom-nav" id="bottomNav">
         <div class="bottom-nav-items">
-            <a href="#menu" class="bottom-nav-item" data-page="menu">
+            <button onclick="navigateToSection('menu')" class="bottom-nav-item active" data-page="menu">
                 <i class="fas fa-hamburger"></i>
                 <span>Menú</span>
-            </a>
-            <a href="#promociones" class="bottom-nav-item" data-page="promociones">
+            </button>
+            <button onclick="navigateToSection('promociones')" class="bottom-nav-item" data-page="promociones">
                 <i class="fas fa-tag"></i>
                 <span>Ofertas</span>
-            </a>
+            </button>
             <div class="bottom-nav-center">
-                <a href="https://wa.me/51919662011" class="bottom-nav-center-btn">
+                <a href="https://wa.me/51919662011?text=Hola,%20quiero%20hacer%20mi%20pedido" class="bottom-nav-center-btn" aria-label="Pedir por WhatsApp">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
-            <button onclick="toggleFavorites()" class="bottom-nav-item" data-page="favorites">
+            <button onclick="showFavoritesPanel()" class="bottom-nav-item" data-page="favorites">
                 <i class="fas fa-heart"></i>
                 <span>Favoritos</span>
-                <span class="badge-count" id="favCountNav" style="display: none; position: absolute; top: -2px; right: 20%; background: #D4AF37; color: #030303; font-size: 0.5625rem; font-weight: 700; padding: 2px 5px; border-radius: 10px; min-width: 18px; text-align: center;">0</span>
+                <span class="badge-count" id="favCountNavMobile" style="display: none; position: absolute; top: 4px; right: 8px; background: #D4AF37; color: #030303; font-size: 0.625rem; font-weight: 700; padding: 2px 5px; border-radius: 10px; min-width: 16px; text-align: center;">0</span>
             </button>
-            <a href="#testimonios" class="bottom-nav-item" data-page="testimonios">
+            <button onclick="navigateToSection('testimonios')" class="bottom-nav-item" data-page="testimonios">
                 <i class="fas fa-star"></i>
                 <span>Reseñas</span>
-            </a>
+            </button>
         </div>
     </div>
 
@@ -1027,16 +1058,27 @@
 
         function updateFavoritesCount() {
             const count = Object.keys(favorites).length;
-            const favCountNav = document.getElementById('favCountNav');
-            favCountNav.textContent = count;
-            favCountNav.style.display = count > 0 ? 'block' : 'none';
+            
+            // Update desktop navbar counter
+            const favCountNavDesktop = document.getElementById('favCountNav');
+            if (favCountNavDesktop) {
+                favCountNavDesktop.textContent = count;
+                favCountNavDesktop.style.display = count > 0 ? 'block' : 'none';
+            }
+            
+            // Update mobile bottom nav counter
+            const favCountNavMobile = document.getElementById('favCountNavMobile');
+            if (favCountNavMobile) {
+                favCountNavMobile.textContent = count;
+                favCountNavMobile.style.display = count > 0 ? 'block' : 'none';
+            }
         }
 
         function toggleFavorites() {
             const favIds = Object.keys(favorites);
-            if (favIds.length === 0) { 
-                showToast('No tienes favoritos aún', 'star'); 
-                return; 
+            if (favIds.length === 0) {
+                showToast('No tienes favoritos aún', 'star');
+                return;
             }
             showToast(`${favIds.length} hamburguesas en favoritos`, 'star');
         }
@@ -1091,12 +1133,57 @@
             }
         });
 
-        // BOTTOM NAV ACTIVE STATE
+        // BOTTOM NAV NAVIGATION
+        function navigateToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const navHeight = 80;
+                const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: sectionPosition - navHeight,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                    item.classList.toggle('active', item.getAttribute('data-page') === sectionId);
+                });
+            }
+        }
+
+        // FAVORITES PANEL
+        function showFavoritesPanel() {
+            const favIds = Object.keys(favorites);
+            if (favIds.length === 0) {
+                showToast('No tienes favoritos aún. ¡Agrega hamburguesas a tu lista!', 'star');
+                return;
+            }
+            
+            // Show favorites in a nice panel
+            const favBurgers = burgers.filter(b => favIds.includes(b.id.toString()));
+            let favoritesList = '🍔 Tus Favoritos:\n\n';
+            favBurgers.forEach((burger, index) => {
+                favoritesList += `${index + 1}. ${burger.name} - S/ ${burger.price.toFixed(2)}\n`;
+            });
+            favoritesList += `\nTotal: ${favBurgers.length} hamburguesa(s)`;
+            favoritesList += `\n\n¿Quieres pedir tus favoritos?`;
+            
+            // Show toast with favorites summary
+            showToast(favoritesList, 'star');
+            
+            // After toast, offer to send order
+            setTimeout(() => {
+                const orderText = `Hola, quiero pedir mis hamburguesas favoritas:\n${favBurgers.map(b => `- ${b.name}`).join('\n')}\n\nTotal aproximado: S/ ${favBurgers.reduce((sum, b) => sum + b.price, 0).toFixed(2)}`;
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(orderText)}`, '_blank');
+            }, 3500);
+        }
+
+        // BOTTOM NAV ACTIVE STATE ON SCROLL
         const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
         const sections = document.querySelectorAll('section[id]');
-        
+
         window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY + 300;
+            const scrollPos = window.scrollY + 200;
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;

@@ -99,13 +99,13 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(18, 18, 18, 0.95); 
-            backdrop-filter: blur(40px); 
+            background: rgba(18, 18, 18, 0.8); 
+            backdrop-filter: blur(10px); 
             border-bottom: 1px solid rgba(197, 160, 89, 0.15); 
             box-shadow: 0 4px 30px rgba(0,0,0,0.5); 
             z-index: 9999;
         }
-        .glass-nav.scrolled { background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(40px); border-bottom: 1px solid rgba(197, 160, 89, 0.2); box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
+        .glass-nav.scrolled { background: rgba(18, 18, 18, 0.9); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(197, 160, 89, 0.2); box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
 
         /* Premium Buttons */
         .btn-primary {
@@ -148,21 +148,34 @@
 
         /* Product Cards */
         .product-card {
-            background: linear-gradient(145deg, rgba(30,30,30,0.95), rgba(20,20,20,0.98));
-            border-radius: 24px; overflow: hidden;
+            background: #1E1E1E;
+            border-radius: 12px; overflow: hidden;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(197, 160, 89, 0.06);
+            border: 1px solid #333;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             display: flex; flex-direction: column;
         }
-        .product-card:hover { transform: translateY(-12px) scale(1.02); border-color: rgba(197, 160, 89, 0.3); box-shadow: 0 30px 80px rgba(197, 160, 89, 0.15); }
+        .product-card:hover { transform: translateY(-5px); border-color: #C5A059; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
         .product-card-img { position: relative; height: 240px; overflow: hidden; flex-shrink: 0; }
         @media (min-width: 768px) { .product-card-img { height: 280px; } }
         .product-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.95) 100%); z-index: 2; }
-        .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .product-card:hover .product-card-img img { transform: scale(1.05); }
         .product-card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         @media (min-width: 768px) { .product-card-body { padding: 24px; } }
+
+        /* Ghost Button for Products */
+        .btn-ghost {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 24px; border-radius: 4px;
+            background: transparent; color: #C5A059; font-weight: 600;
+            border: 1px solid #C5A059; text-transform: uppercase;
+            letter-spacing: 0.05em; font-size: 0.875rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer; text-decoration: none;
+        }
+        .btn-ghost:hover { background: #C5A059; color: #0A0A0A; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
+        .btn-ghost span { position: relative; z-index: 1; }
 
         /* Action Buttons */
         .action-btn {
@@ -182,9 +195,9 @@
         /* Badges */
         .badge { position: absolute; padding: 6px 14px; border-radius: 100px; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; z-index: 5; backdrop-filter: blur(8px); }
         @media (min-width: 768px) { .badge { padding: 8px 16px; font-size: 0.75rem; } }
-        .badge-popular { top: 12px; left: 12px; background: linear-gradient(135deg, rgba(197,160,89,0.95), rgba(166,139,62,0.95)); color: #0A0A0A; box-shadow: 0 4px 20px rgba(197,160,89,0.4); }
-        .badge-new { top: 12px; left: 12px; background: linear-gradient(135deg, rgba(197,160,89,0.95), rgba(166,139,62,0.95)); color: #0A0A0A; box-shadow: 0 4px 20px rgba(197,160,89,0.4); }
-        .badge-spicy { top: 12px; left: 12px; background: linear-gradient(135deg, rgba(197,160,89,0.95), rgba(139,90,43,0.95)); color: #0A0A0A; box-shadow: 0 4px 20px rgba(197,160,89,0.4); }
+        .badge-popular { top: 12px; left: 12px; background: rgba(0, 0, 0, 0.5); border: 1px solid #C5A059; color: #C5A059; box-shadow: none; }
+        .badge-new { top: 12px; left: 12px; background: rgba(0, 0, 0, 0.5); border: 1px solid #C5A059; color: #C5A059; box-shadow: none; }
+        .badge-spicy { top: 12px; left: 12px; background: rgba(0, 0, 0, 0.5); border: 1px solid #C5A059; color: #C5A059; box-shadow: none; }
         .badge-urgent { top: 12px; right: 12px; left: auto; background: linear-gradient(135deg, #DC2626, #991B1B); color: #fff; box-shadow: 0 4px 20px rgba(220,38,38,0.4); animation: pulse 2s infinite; }
 
         /* Toast */
@@ -513,9 +526,63 @@
         /* Stats */
         .stat-number {
             font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 5rem); font-weight: 700;
-            background: linear-gradient(135deg, #C5A059 0%, #F5F5F5 50%, #C5A059 100%);
-            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease infinite;
+            background: linear-gradient(180deg, #F5F5F5 0%, #C5A059 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            position: relative;
+            overflow: hidden;
+            background: #0A0A0A;
+        }
+        .experience-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(197, 160, 89, 0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 50%, rgba(197, 160, 89, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .experience-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.25rem, 3.5vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.5;
+            color: #F5F5F5;
+            position: relative;
+        }
+        .experience-quote::before {
+            content: '\201C';
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-family: 'Playfair Display', serif;
+            color: rgba(197, 160, 89, 0.15);
+            position: absolute;
+            top: -2rem;
+            left: -1.5rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .experience-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C5A059, transparent);
+            margin: 0 auto;
+        }
+        .experience-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #C5A059;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
         }
 
         /* Mobile Menu */
@@ -831,13 +898,13 @@
             </div>
 
             <h1 class="reveal text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight" style="transition-delay: 100ms;">
-                El Sabor Que <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600">Tu Paladar Merece</span>
+                El Arte de la <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600">Hamburguesa de Autor</span>
             </h1>
 
             <p class="reveal text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light" style="transition-delay: 200ms;">
-                Hamburguesas gourmet con carne 100% Angus, ingredientes frescos del día
-                y el toque secreto que las hace irresistibles.
+                Carne Angus certificada, pan artesanal y una selección de ingredientes
+                que redefinen el lujo casual.
             </p>
 
             <div class="reveal flex flex-col sm:flex-row gap-4 justify-center mb-8" style="transition-delay: 300ms;">
@@ -891,6 +958,39 @@
                 <div class="reveal text-center" style="transition-delay: 300ms;">
                     <div class="stat-number" data-target="100">100%</div>
                     <p class="text-gray-500 mt-2 text-sm font-medium">Ingredientes Frescos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION - Gourmet Quotes -->
+    <section class="experience-section py-20 md:py-28 border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="reveal">
+                <span class="experience-tag mb-8">
+                    <i class="fas fa-gem"></i> Experiencia Gourmet
+                </span>
+            </div>
+            <div class="experience-divider my-10 reveal" style="transition-delay: 100ms;"></div>
+            <blockquote class="experience-quote reveal" style="transition-delay: 200ms;">
+                No es comida rápida, es cocina de autor entre dos panes.
+            </blockquote>
+            <div class="experience-divider my-10 reveal" style="transition-delay: 300ms;"></div>
+            <p class="reveal text-gray-500 text-base md:text-lg font-light max-w-xl mx-auto" style="transition-delay: 400ms;">
+                Cada hamburguesa que sale de nuestra cocina es el resultado de una obsesión por los detalles: desde la selección de la carne hasta el punto exacto del pan artesanal.
+            </p>
+            <div class="reveal mt-10 flex flex-wrap justify-center gap-6 md:gap-10" style="transition-delay: 500ms;">
+                <div class="flex items-center gap-3 text-sm">
+                    <i class="fas fa-certificate text-gold-500"></i>
+                    <span class="text-gray-400">Carne Angus Certificada</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm">
+                    <i class="fas fa-seedling text-gold-500"></i>
+                    <span class="text-gray-400">Ingredientes Orgánicos</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm">
+                    <i class="fas fa-award text-gold-500"></i>
+                    <span class="text-gray-400">Pan Artesanal Horneado</span>
                 </div>
             </div>
         </div>
@@ -1518,7 +1618,7 @@
                             <span class="text-gold-400 font-bold text-lg md:text-xl">S/ ${burger.price.toFixed(2)}</span>
                         </div>
                         <p class="text-gray-400 text-sm mb-4 leading-relaxed font-light flex-grow">${burger.desc}</p>
-                        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20quiero%20pedir%20la%20hamburguesa%20${encodeURIComponent(burger.name)}" class="btn-primary w-full py-3 rounded-full text-sm">
+                        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20quiero%20pedir%20la%20hamburguesa%20${encodeURIComponent(burger.name)}" class="btn-ghost w-full py-3 text-sm">
                             <span><i class="fab fa-whatsapp"></i> Pedir Esta</span>
                         </a>
                     </div>
@@ -1737,31 +1837,46 @@
         }
         observeReveal();
 
-        // STATS
+        // STATS - Animated counters with easing
         let statsAnimated = false;
-        window.addEventListener('scroll', () => {
-            if (statsAnimated) return;
-            const section = document.querySelector('.stat-number')?.closest('section');
-            if (section && section.getBoundingClientRect().top < window.innerHeight - 100) {
-                statsAnimated = true;
-                document.querySelectorAll('.stat-number').forEach(stat => {
-                    const target = parseInt(stat.getAttribute('data-target'));
-                    let current = 0;
-                    const increment = target / 50;
-                    const suffix = target === 100 ? '%' : target === 98 ? '%' : '+';
-                    const update = () => {
-                        if (current < target) {
-                            current += increment;
-                            stat.textContent = Math.ceil(current).toLocaleString() + suffix;
-                            setTimeout(update, 30);
-                        } else { 
-                            stat.textContent = target.toLocaleString() + suffix; 
+        function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statsAnimated = true;
+                    document.querySelectorAll('.stat-number').forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        const duration = 2000; // 2 seconds
+                        const startTime = performance.now();
+                        const suffix = target === 100 ? '%' : target === 98 ? '%' : '+';
+                        const formatTarget = target >= 1000 ? target.toLocaleString() + suffix : target + suffix;
+
+                        function animateCounter(currentTime) {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const easedProgress = easeOutQuart(progress);
+                            const currentValue = Math.round(easedProgress * target);
+
+                            if (target >= 1000) {
+                                stat.textContent = currentValue.toLocaleString() + suffix;
+                            } else {
+                                stat.textContent = currentValue + suffix;
+                            }
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animateCounter);
+                            } else {
+                                stat.textContent = formatTarget;
+                            }
                         }
-                    };
-                    update();
-                });
-            }
-        });
+                        requestAnimationFrame(animateCounter);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const statsSection = document.querySelector('.stat-number')?.closest('section');
+        if (statsSection) statsObserver.observe(statsSection);
 
         // BOTTOM NAV NAVIGATION - Global function for onclick
         window.navigateToSection = function(sectionId) {

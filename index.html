@@ -744,16 +744,42 @@
         }
 
         /* Hero Slider */
-        .hero-slider { position: relative; height: 100vh; min-height: 600px; overflow: hidden; }
+        .hero-slider { position: relative; height: 100vh; height: 100dvh; min-height: 550px; overflow: hidden; }
         .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease-in-out; }
         .hero-slide.active { opacity: 1; }
-        .hero-slide-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1); transition: transform 6s ease-out; }
+        .hero-slide-img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1); transition: transform 6s ease-out; }
         .hero-slide.active .hero-slide-img { transform: scale(1.1); }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.4) 40%, rgba(10,10,10,0.85) 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 20px 100px; width: 100%; max-width: 100%; margin: 0 auto; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.35) 35%, rgba(10,10,10,0.8) 100%); z-index: 1; }
+
+        /* Hero Content — Mobile: centered vertically */
+        .hero-content {
+            position: relative; z-index: 10; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 70px 20px 90px; width: 100%; max-width: 100%; margin: 0 auto;
+        }
         .hero-content .reveal { display: flex; flex-direction: column; align-items: center; width: 100%; }
         .hero-content .reveal.flex { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-        @media (min-width: 768px) { .hero-content { padding: 100px 24px 120px; max-width: 72rem; } }
+
+        /* Hero — Tablet (768px+) */
+        @media (min-width: 768px) {
+            .hero-content { padding: 80px 32px 100px; max-width: 72rem; }
+        }
+
+        /* Hero — PC/Desktop (1024px+): content shifts UP to upper-center */
+        @media (min-width: 1024px) {
+            .hero-slider { min-height: 700px; }
+            .hero-content {
+                justify-content: flex-start;
+                padding-top: 12vh;
+                padding-bottom: 60px;
+                max-width: 72rem;
+            }
+        }
+
+        /* Hero — Large screens (1440px+) */
+        @media (min-width: 1440px) {
+            .hero-content { padding-top: 14vh; }
+        }
 
         /* Hero Slider Indicators */
         .hero-indicators { position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 20; }
@@ -846,9 +872,9 @@
         }
 
         /* Mobile Typography & Centering */
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .hero-content h1 { font-size: 2.2rem !important; }
-            .hero-content { gap: 0; }
+            .hero-content { gap: 0; justify-content: center; }
             .hero-content .reveal { width: 100%; display: flex; flex-direction: column; align-items: center; }
             .hero-content .reveal.flex { flex-direction: row; flex-wrap: wrap; justify-content: center; }
 
@@ -879,6 +905,11 @@
         @media (min-width: 769px) {
             .hero-content { max-width: 72rem; margin: 0 auto; }
             .hero-social-proof { flex-wrap: nowrap; }
+        }
+
+        /* Hero overlay adjustment for readability on all devices */
+        @media (max-width: 767px) {
+            .hero-overlay { background: linear-gradient(180deg, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.3) 30%, rgba(10,10,10,0.85) 100%); }
         }
 
         /* Ensure inline elements don't overflow */
